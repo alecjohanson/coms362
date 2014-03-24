@@ -6,5 +6,4 @@
  */
 public interface IGameManagementSystem {
     public boolean createGame(String team1, String team2);
-    public boolean addNoteToGame(String note, int gameID);
 }
