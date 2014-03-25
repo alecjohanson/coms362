@@ -1,3 +1,4 @@
+package coms362.scoretracker.controller;
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
