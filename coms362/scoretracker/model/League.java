@@ -1,5 +1,8 @@
 package coms362.scoretracker.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
@@ -7,11 +10,48 @@ package coms362.scoretracker.model;
  * Time: 11:01 AM
  */
 public class League implements ILeague {
-    public boolean addLeague(String leagueName) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+	
+	private List<Team> teams;
+	private List<Team> newTeams;
+	private String leagueName;
+	private int leagueId;
+
+	public League(String name) {
+		this.leagueName = name;
+		this.setTeams(new ArrayList<Team>());
+		this.newTeams = new ArrayList<Team>();
+	}
+	
+    public boolean addToLeague(Team team) {
+    	newTeams.add(team);
+    	return true;
+    }
+    
+    public String getLeagueName() {
+    	return this.leagueName;
+    }
+    
+    public void setLeagueName(String name) {
+    	this.leagueName = name;
     }
 
-    public boolean addToLeague(ITeam team) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+	public int getLeagueId() {
+		return leagueId;
+	}
+
+	public void setLeagueId(int leagueId) {
+		this.leagueId = leagueId;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
+	
+	public List<Team> getNewTeams() {
+		return this.newTeams;
+	}
 }

@@ -65,4 +65,8 @@ public class Team  implements ITeam{
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
+	
+	public String toString() {
+		return this.teamName;
+	}
 }

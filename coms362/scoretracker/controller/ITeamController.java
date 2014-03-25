@@ -6,7 +6,7 @@ package coms362.scoretracker.controller;
  * Time: 11:15 AM
  */
 public interface ITeamController {
-    public void addTeam(String teamName);
+    public boolean addTeam(String teamName);
     public void addNotetoPlayer(String playerName, int teamID, String note);
     public void addNotetoTeam(int teamID, String note);
     public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight);

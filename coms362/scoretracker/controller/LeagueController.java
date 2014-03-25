@@ -17,10 +17,10 @@ public class LeagueController implements ILeagueController{
 	private ILeagueManagementSystem leagueManager;
 	
     public boolean addTeam(String teamName, String leagueName) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return leagueManager.addTeam(teamName, leagueName);
     }
 
     public boolean addLeague(String leagueName) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    	return leagueManager.addLeague(leagueName);
     }
 }

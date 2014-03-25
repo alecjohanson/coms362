@@ -1,6 +1,7 @@
 package coms362.scoretracker.data;
 
 import coms362.scoretracker.model.ILeague;
+import coms362.scoretracker.model.League;
 
 public interface ILeagueDAO {
 
@@ -8,7 +9,7 @@ public interface ILeagueDAO {
 	 * 
 	 * @param league
 	 */
-	void addLeague(ILeague league);
+	void addLeague(League league);
 	
 	/**
 	 * 
@@ -21,6 +22,6 @@ public interface ILeagueDAO {
 	 * 
 	 * @param league
 	 */
-	void putLeague(ILeague league);
+	void putLeague(League league);
 	
 }

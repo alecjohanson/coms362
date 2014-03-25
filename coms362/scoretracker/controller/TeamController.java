@@ -15,8 +15,8 @@ public class TeamController implements ITeamController {
 	@Autowired
 	private ITeamManagementSystem teamManager;
     
-	public void addTeam(String teamName) {
-        teamManager.addTeam(teamName);
+	public boolean addTeam(String teamName) {
+        return teamManager.addTeam(teamName);
     }
 
     public void addNotetoPlayer(String playerName, int teamID, String note) {

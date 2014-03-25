@@ -60,8 +60,14 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 	}
 
 	@Override
-	public void addTeam(String teamName) {
-		Team team = new Team(teamName);
-		teamDAO.addTeam(team);
+	public boolean addTeam(String teamName) {
+		try {
+			Team team = new Team(teamName);
+			teamDAO.addTeam(team);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 }

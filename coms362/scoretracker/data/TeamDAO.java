@@ -38,7 +38,6 @@ public class TeamDAO implements ITeamDAO {
 	@Override
 	public void addTeam(Team team) {
 	
-		// TODO see if teamname exists before inserting
 		String sql = "INSERT INTO team " + "(teamname) VALUES (?)";
 		
 		jdbcTemplate = new JdbcTemplate(dataSource);
@@ -80,7 +79,6 @@ public class TeamDAO implements ITeamDAO {
 			Player player = new Player((String)row.get("first_name"), (String)row.get("last_name"), (Integer)row.get("number"), (String)row.get("position"), (Double)row.get("weight"));
 			player.setRowid((Integer)row.get("team_player_id"));
 			players.add(player);
-			System.out.println(player);
 		}
 		return players;
 	}
