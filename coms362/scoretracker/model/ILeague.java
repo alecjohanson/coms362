@@ -1,3 +1,4 @@
+package coms362.scoretracker.model;
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
