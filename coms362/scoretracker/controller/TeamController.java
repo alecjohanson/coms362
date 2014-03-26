@@ -11,23 +11,39 @@ import coms362.scoretracker.management.ITeamManagementSystem;
  * Time: 11:42 AM
  */
 public class TeamController implements ITeamController {
+<<<<<<< HEAD:coms362/scoretracker/controller/TeamController.java
 	
 	@Autowired
 	private ITeamManagementSystem teamManager;
     
 	public boolean addTeam(String teamName) {
         return teamManager.addTeam(teamName);
+=======
+    public boolean addTeam(String teamName) {
+        return false; //TODO implement method
+
+>>>>>>> origin/master:TeamController.java
     }
 
     public void addNotetoPlayer(String playerName, int teamID, String note) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        TeamManagementSystem tms = new TeamManagementSystem();
+        String teamName="";
+        tms.addNoteToPlayer(playerName, teamName, note);
     }
 
     public void addNotetoTeam(int teamID, String note) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        String teamName= "";
+        TeamManagementSystem tms = new TeamManagementSystem();
+        tms.addNoteToTeam(note,teamName);
+
     }
 
     public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
+<<<<<<< HEAD:coms362/scoretracker/controller/TeamController.java
         return teamManager.createPlayer(firstName, lastName, number, team, position, weight);
+=======
+        TeamManagementSystem tms = new TeamManagementSystem();
+        return tms.createPlayer(firstName, lastName,number, team, position, weight);
+>>>>>>> origin/master:TeamController.java
     }
 }
