@@ -6,18 +6,26 @@
  */
 public class TeamManagementSystem implements ITeamManagementSystem {
     public ITeam getTeam(String teamName) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null; //TODO implement method
     }
 
-    public boolean addNoteToPlayer(String playerID, String teamID, String note) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public void addNoteToPlayer(String playerID, String teamID, String note) {
+        ITeam team = getTeam(teamID);
+        team.addNoteToPlayer(note, playerID); //TODO: Player name or ID?
     }
 
-    public boolean addNoteToTeam(String note, String teamName) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public void addNoteToTeam(String note, String teamName) {
+        ITeam team = getTeam(teamName);
+        team.addNote(note);
     }
 
-    public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public boolean createPlayer(String firstName, String lastName, int number, String teamName, String position, double weight) {
+        ITeam team = getTeam(teamName);
+        Player player = new Player(firstName, lastName, number, teamName, position, weight);
+        return team.addPlayer(player);
+    }
+
+    public void addNoteToGame(String note, int gameID) {
+
     }
 }

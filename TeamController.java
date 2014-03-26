@@ -6,18 +6,25 @@
  */
 public class TeamController implements ITeamController {
     public boolean addTeam(String teamName) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false; //TODO implement method
+
     }
 
     public void addNotetoPlayer(String playerName, int teamID, String note) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        TeamManagementSystem tms = new TeamManagementSystem();
+        String teamName="";
+        tms.addNoteToPlayer(playerName, teamName, note);
     }
 
     public void addNotetoTeam(int teamID, String note) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        String teamName= "";
+        TeamManagementSystem tms = new TeamManagementSystem();
+        tms.addNoteToTeam(note,teamName);
+
     }
 
     public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        TeamManagementSystem tms = new TeamManagementSystem();
+        return tms.createPlayer(firstName, lastName,number, team, position, weight);
     }
 }

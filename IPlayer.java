@@ -5,5 +5,6 @@
  * Time: 11:01 AM
  */
 public interface IPlayer {
+    public String name = "";
     public void addNote(String note);
 }

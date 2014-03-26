@@ -6,8 +6,25 @@
  */
 public class Player implements IPlayer
 {
+    public String name;
+    public String lastName;
+    public int number;
+    public String team;
+    public String position;
+    public double weight;
+    public String note;
+
+    public Player(String firstName, String lastName, int number, String team, String position, double weight)
+    {
+        this.name = firstName;
+        this.lastName = lastName;
+        this.number = number;
+        this.team = team;
+        this.position = position;
+        this. weight = weight;
+    }
 
     public void addNote(String note) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        this.note = note;
     }
 }
