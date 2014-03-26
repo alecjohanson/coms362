@@ -12,21 +12,24 @@ public class TestApp {
 		ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 		ITeamController teamController = (ITeamController) context.getBean("teamController");
 		ILeagueController leagueController = (ILeagueController) context.getBean("leagueController");
-		//teamController.addTeam("Iowa State Cyclones");
-//		if (teamController.createPlayer("Melvin", "Ejim", 3, "Iowa State Cyclones", "F", 210))
+//		teamController.addTeam("Iowa Hawkeyes");
+//		if (teamController.createPlayer("Naz", "Long", 10, "Iowa State Cyclones", "G", 190))
 //			System.out.println("Success");
 //		else
 //			System.out.println("Failed");
-		
-		if (leagueController.addTeam("Iowa State Cyclones", "Big 12"))
+
+		if (leagueController.addLeague("Big 10"))
 			System.out.println("Success");
 		else
 			System.out.println("Failed");
 		
-//		if (leagueController.addLeague("Big 12"))
-//			System.out.println("Success");
-//		else
-//			System.out.println("Failed");
+		if (leagueController.addTeam("Iowa Hawkeyes", "Big 10"))
+			System.out.println("Success");
+		else
+			System.out.println("Failed");
+		
+		
+		
 	
 	}
 

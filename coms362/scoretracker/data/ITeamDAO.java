@@ -1,7 +1,6 @@
 package coms362.scoretracker.data;
 
 import coms362.scoretracker.model.ITeam;
-import coms362.scoretracker.model.Team;
 
 public interface ITeamDAO {
 	
@@ -9,7 +8,7 @@ public interface ITeamDAO {
 	 * 
 	 * @param team
 	 */
-	void addTeam(Team team);
+	void addTeam(ITeam team);
 	
 	/**
 	 * 
@@ -22,6 +21,6 @@ public interface ITeamDAO {
 	 * 
 	 * @param team
 	 */
-	void putTeam(Team team);
+	void putTeam(ITeam team);
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import coms362.scoretracker.data.rowmapper.LeagueRowMapper;
 import coms362.scoretracker.model.ILeague;
+import coms362.scoretracker.model.ITeam;
 import coms362.scoretracker.model.League;
 import coms362.scoretracker.model.Team;
 
@@ -28,7 +29,7 @@ public class LeagueDAO implements ILeagueDAO {
 	}
 	
 	@Override
-	public void addLeague(League league) {
+	public void addLeague(ILeague league) {
 		
 		String sql = "INSERT INTO league " + "(leaguename) VALUES (?)";
 		
@@ -46,25 +47,25 @@ public class LeagueDAO implements ILeagueDAO {
 		
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		League returnTeam = (League) jdbcTemplate.queryForObject(sql, new Object[] { league }, new LeagueRowMapper());
+		ILeague returnTeam = (League) jdbcTemplate.queryForObject(sql, new Object[] { league }, new LeagueRowMapper());
 		returnTeam.setTeams(getTeams(returnTeam.getLeagueId()));
 		return returnTeam;
 	}
 
 	@Override
-	public void putLeague(League league) {
+	public void putLeague(ILeague league) {
 		String sql = "INSERT INTO league_team_map (leagueid, teamid) VALUES(?,?)";
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		for (Team t : league.getNewTeams()) {
+		for (ITeam t : league.getNewTeams()) {
 			jdbcTemplate.update(sql, new Object[] { league.getLeagueId(), t.getTeamId() });
 		}
 	}
 
-	private List<Team> getTeams(int leagueid) {
+	private List<ITeam> getTeams(int leagueid) {
 		String sql = "SELECT * FROM team WHERE teamid IN (SELECT teamid FROM league_team_map WHERE leagueid = ?)";
 		jdbcTemplate = new JdbcTemplate(dataSource);
-		List<Team> teams = new ArrayList<Team>();
+		List<ITeam> teams = new ArrayList<ITeam>();
 		
 		List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, new Object[] { leagueid } );
 		for (Map row : rows) {

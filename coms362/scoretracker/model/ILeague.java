@@ -1,4 +1,7 @@
 package coms362.scoretracker.model;
+
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
@@ -6,11 +9,20 @@ package coms362.scoretracker.model;
  * Time: 11:02 AM
  */
 public interface ILeague {
-<<<<<<< HEAD:coms362/scoretracker/model/ILeague.java
 
-    public boolean addToLeague(Team team);
-=======
-    public String name=null;
     public boolean addToLeague(ITeam team);
->>>>>>> origin/master:ILeague.java
+    
+    public String getLeagueName();
+    
+    public void setLeagueName(String name);
+
+	public int getLeagueId();
+
+	public void setLeagueId(int leagueId);
+
+	public List<ITeam> getTeams();
+
+	public void setTeams(List<ITeam> teams);
+	
+	public List<ITeam> getNewTeams();
 }

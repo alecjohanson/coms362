@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import coms362.scoretracker.data.rowmapper.TeamRowMapper;
-import coms362.scoretracker.model.IPlayer;
 import coms362.scoretracker.model.ITeam;
 import coms362.scoretracker.model.Player;
 import coms362.scoretracker.model.Team;
@@ -36,7 +35,7 @@ public class TeamDAO implements ITeamDAO {
 	}
 	
 	@Override
-	public void addTeam(Team team) {
+	public void addTeam(ITeam team) {
 	
 		String sql = "INSERT INTO team " + "(teamname) VALUES (?)";
 		
@@ -59,7 +58,7 @@ public class TeamDAO implements ITeamDAO {
 	}
 
 	@Override
-	public void putTeam(Team team) {
+	public void putTeam(ITeam team) {
 		String sql = "INSERT INTO team_player_map (first_name, last_name, number, team, position, weight) VALUES(?,?,?,?,?,?)";
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		

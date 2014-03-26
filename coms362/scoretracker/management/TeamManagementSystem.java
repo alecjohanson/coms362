@@ -44,7 +44,7 @@ public class TeamManagementSystem implements ITeamManagementSystem {
         	if (curTeam == null)
         		return false;
         	curTeam.addPlayer(new Player(firstName, lastName, number, position, weight));
-        	teamDAO.putTeam((Team)curTeam);
+        	teamDAO.putTeam((ITeam)curTeam);
         	return true;
         	
         } catch (Exception ex) {
@@ -54,15 +54,15 @@ public class TeamManagementSystem implements ITeamManagementSystem {
     }
 
 	@Override
-	public boolean addNoteToGame(String note, int gameID) {
+	public void addNoteToGame(String note, int gameID) {
 		// TODO Auto-generated method stub
-		return false;
+		return;
 	}
 
 	@Override
 	public boolean addTeam(String teamName) {
 		try {
-			Team team = new Team(teamName);
+			ITeam team = new Team(teamName);
 			teamDAO.addTeam(team);
 			return true;
 		} catch (Exception ex) {

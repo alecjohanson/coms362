@@ -9,7 +9,7 @@ public interface ILeagueDAO {
 	 * 
 	 * @param league
 	 */
-	void addLeague(League league);
+	void addLeague(ILeague league);
 	
 	/**
 	 * 
@@ -22,6 +22,6 @@ public interface ILeagueDAO {
 	 * 
 	 * @param league
 	 */
-	void putLeague(League league);
+	void putLeague(ILeague league);
 	
 }

@@ -10,7 +10,7 @@ import coms362.scoretracker.model.Team;
 
 public class TeamRowMapper implements RowMapper {
 	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Team team = new Team(rs.getString("teamname"));
+		ITeam team = new Team(rs.getString("teamname"));
 		team.setTeamId(rs.getInt("teamid"));
 		return team;
 	}

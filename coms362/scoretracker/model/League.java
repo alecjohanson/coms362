@@ -11,18 +11,18 @@ import java.util.List;
  */
 public class League implements ILeague {
 	
-	private List<Team> teams;
-	private List<Team> newTeams;
+	private List<ITeam> teams;
+	private List<ITeam> newTeams;
 	private String leagueName;
 	private int leagueId;
 
 	public League(String name) {
 		this.leagueName = name;
-		this.setTeams(new ArrayList<Team>());
-		this.newTeams = new ArrayList<Team>();
+		this.setTeams(new ArrayList<ITeam>());
+		this.newTeams = new ArrayList<ITeam>();
 	}
 	
-    public boolean addToLeague(Team team) {
+    public boolean addToLeague(ITeam team) {
     	newTeams.add(team);
     	return true;
     }
@@ -43,15 +43,15 @@ public class League implements ILeague {
 		this.leagueId = leagueId;
 	}
 
-	public List<Team> getTeams() {
+	public List<ITeam> getTeams() {
 		return teams;
 	}
 
-	public void setTeams(List<Team> teams) {
+	public void setTeams(List<ITeam> teams) {
 		this.teams = teams;
 	}
 	
-	public List<Team> getNewTeams() {
+	public List<ITeam> getNewTeams() {
 		return this.newTeams;
 	}
 }

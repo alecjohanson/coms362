@@ -1,4 +1,7 @@
 package coms362.scoretracker.model;
+
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
@@ -9,9 +12,21 @@ public interface ITeam {
     public void addNoteToPlayer(String note, String playerName);
     public void addNoteToGame(String note, int gameID);
     public void addNote(String note);
-<<<<<<< HEAD:coms362/scoretracker/model/ITeam.java
     public void addPlayer(Player player);
-=======
-    public boolean addPlayer(IPlayer player);
->>>>>>> origin/master:ITeam.java
+    
+	public abstract String getTeamName();
+
+	public abstract void setTeamName(String teamName);
+
+	public abstract Integer getTeamId();
+
+	public abstract void setTeamId(Integer teamId);
+
+	public abstract List<Player> getPlayers();
+
+	public abstract List<Player> getNewPlayers();
+
+	public abstract void setPlayers(List<Player> players);
+
+	public abstract String toString();
 }

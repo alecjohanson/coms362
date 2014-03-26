@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import coms362.scoretracker.data.IGameDAO;
+import coms362.scoretracker.model.Game;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,7 +15,6 @@ import coms362.scoretracker.data.IGameDAO;
 
 @Service
 public class GameManagementSystem implements IGameManagementSystem{
-<<<<<<< HEAD:coms362/scoretracker/management/GameManagementSystem.java
 	
 	@Autowired
 	private IGameDAO gameDAO;
@@ -22,12 +22,6 @@ public class GameManagementSystem implements IGameManagementSystem{
 	public GameManagementSystem() {
 		
 	}
-	
-    public boolean createGame(String team1, String team2) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-=======
->>>>>>> origin/master:GameManagementSystem.java
 
     public boolean createGame(String team1, String team2) {
         Game game = new Game(team1, team2);
