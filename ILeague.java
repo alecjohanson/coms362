@@ -5,5 +5,6 @@
  * Time: 11:02 AM
  */
 public interface ILeague {
+    public String name=null;
     public boolean addToLeague(ITeam team);
 }

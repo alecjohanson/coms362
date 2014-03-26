@@ -24,4 +24,14 @@ public class LeagueManagementSystem implements ILeagueManagementSystem{
         return leagues.add(new League(leagueName));
     }
 
+    private ILeague getLeague(String leagueName)
+    {
+        for(int i=0;i<leagues.size();i++)
+        {
+            if(leagues.get(i).name == leagueName);
+                return leagues.get(i);
+        }
+        return null;
+    }
+
 }
