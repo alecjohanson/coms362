@@ -8,5 +8,5 @@ public interface ITeam {
     public void addNoteToPlayer(String note, String playerName);
     public void addNoteToGame(String note, int gameID);
     public void addNote(String note);
-    public void addPlayer(IPlayer player);
+    public boolean addPlayer(IPlayer player);
 }

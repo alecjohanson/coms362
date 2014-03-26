@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
@@ -5,11 +8,16 @@
  * Time: 11:01 AM
  */
 public class League implements ILeague {
-    public boolean addLeague(String leagueName) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    List<ITeam> teams;
+    public String name;
+
+    public League(String name)
+    {
+        this.name = name;
+        teams = new ArrayList<ITeam>();
     }
 
     public boolean addToLeague(ITeam team) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return teams.add(team);
     }
 }
