@@ -54,7 +54,7 @@ public class TeamManagementSystem implements ITeamManagementSystem {
     }
 
 	@Override
-	public void addNoteToGame(String note, int gameID) {
+	public boolean addNoteToGame(String note, int gameID) {
 		// TODO Auto-generated method stub
 		return;
 	}
