@@ -15,11 +15,15 @@ public class Team implements ITeam {
 	private Integer teamId;
 	private List<Player> players;
 	private List<Player> newPlayers;
-
+	private List<String> notes;
+	private List<String> newNotes;
+	
 	public Team(String teamName) {
 		this.setTeamName(teamName);
 		players = new ArrayList<Player>();
 		newPlayers = new ArrayList<Player>();
+		notes = new ArrayList<String>();
+		newNotes = new ArrayList<String>();
 	}
 
 	/* (non-Javadoc)
@@ -43,7 +47,7 @@ public class Team implements ITeam {
 	 */
 
 	public void addNote(String note) {
-		//To change body of implemented methods use File | Settings | File Templates.
+		this.newNotes.add(note);
 	}
 
 	/* (non-Javadoc)
@@ -117,4 +121,17 @@ public class Team implements ITeam {
 	public String toString() {
 		return this.teamName;
 	}
+	
+	public void setNotes(List<String> notes) {
+		this.notes = notes;
+	}
+	
+	public List<String> getNotes() {
+		return this.notes;
+	}
+	
+	public List<String> getNewNotes() {
+		return this.newNotes;
+	}
+	
 }

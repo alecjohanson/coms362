@@ -29,4 +29,6 @@ public interface ITeam {
 	public abstract void setPlayers(List<Player> players);
 
 	public abstract String toString();
+	
+	public abstract List<String> getNewNotes();
 }

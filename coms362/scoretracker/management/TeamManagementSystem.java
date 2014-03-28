@@ -35,7 +35,17 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 	}
 
 	public boolean addNoteToTeam(String note, String teamName) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+		try {
+			ITeam curTeam = teamDAO.getTeam(teamName);
+			if (curTeam == null)
+				return false;
+			curTeam.addNote(note);
+			teamDAO.putTeam(curTeam);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
 	}
 
 	public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
@@ -46,7 +56,6 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 			curTeam.addPlayer(new Player(firstName, lastName, number, position, weight));
 			teamDAO.putTeam((ITeam) curTeam);
 			return true;
-
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return false;

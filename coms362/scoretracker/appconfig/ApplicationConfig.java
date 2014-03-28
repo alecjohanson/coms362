@@ -2,12 +2,16 @@ package coms362.scoretracker.appconfig;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import coms362.scoretracker.controller.GameController;
+import coms362.scoretracker.controller.IGameController;
 import coms362.scoretracker.controller.ILeagueController;
 import coms362.scoretracker.controller.ITeamController;
 import coms362.scoretracker.controller.LeagueController;
@@ -15,16 +19,21 @@ import coms362.scoretracker.controller.TeamController;
 
 @Configuration
 @ComponentScan("coms362.scoretracker")
+@PropertySource(value="classpath:app.properties")
 public class ApplicationConfig {
 	
-	@Value("jdbc:sqlite:C:/Users/jack_ultra/git/coms362/data/scoretracker_db.sqlite") String jdbcUrl;
-	@Value("org.sqlite.JDBC") String driverClassName;
+	@Autowired
+	private Environment env;
+	
+// 	This wouldn't work for some reason... weird.
+//	@Value("${jdbc.url}") String jdbcUrl;
+//	@Value("${jdbc.driver}") String driverClassName;
 
 	
 	@Bean(name="dataSource")
 	public DataSource getDataSource() {
-	   DriverManagerDataSource ds = new DriverManagerDataSource(jdbcUrl);
-	   ds.setDriverClassName(driverClassName);
+	   DriverManagerDataSource ds = new DriverManagerDataSource(env.getProperty("jdbc.url"));
+	   ds.setDriverClassName(env.getProperty("jdbc.driver"));
 	   return ds;
 	}
 	
@@ -38,6 +47,10 @@ public class ApplicationConfig {
 		return new LeagueController();
 	}
 	
+	@Bean(name="gameController")
+	public IGameController getGameController() {
+		return new GameController();
+	}
 	
 //	@Bean(name="teamManager")
 //	public ITeamManagementSystem getTeamManager() {

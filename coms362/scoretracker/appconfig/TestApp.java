@@ -18,17 +18,17 @@ public class TestApp {
 //		else
 //			System.out.println("Failed");
 
-		if (leagueController.addLeague("Big 10"))
-			System.out.println("Success");
-		else
-			System.out.println("Failed");
+//		if (leagueController.addLeague("Big 10"))
+//			System.out.println("Success");
+//		else
+//			System.out.println("Failed");
+//		
+//		if (leagueController.addTeam("Iowa Hawkeyes", "Big 10"))
+//			System.out.println("Success");
+//		else
+//			System.out.println("Failed");
 		
-		if (leagueController.addTeam("Iowa Hawkeyes", "Big 10"))
-			System.out.println("Success");
-		else
-			System.out.println("Failed");
-		
-		
+		teamController.addNotetoTeam("Iowa State Cyclones", "This team is very good");
 		
 	
 	}

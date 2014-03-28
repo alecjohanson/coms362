@@ -1,19 +1,33 @@
-package controller;
-
-import coms362.scoretracker.management.GameManagementSystem;
-import coms362.scoretracker.management.LeagueManagementSystem;
-import coms362.scoretracker.management.TeamManagementSystem;
+package coms362.scoretracker.gui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import coms362.scoretracker.appconfig.ApplicationConfig;
+import coms362.scoretracker.controller.IGameController;
+import coms362.scoretracker.controller.ILeagueController;
+import coms362.scoretracker.controller.ITeamController;
+import coms362.scoretracker.management.GameManagementSystem;
+import coms362.scoretracker.management.LeagueManagementSystem;
+import coms362.scoretracker.management.TeamManagementSystem;
+
 public class GUI{
-	static GameManagementSystem GMS = new GameManagementSystem();
-	static TeamManagementSystem TMS = new TeamManagementSystem();
-	static LeagueManagementSystem LMS = new LeagueManagementSystem();
+	
+	private static ITeamController teamController;
+	private static ILeagueController leagueController;
+	private static IGameController gameController;
 	
 	public static void main(String[] args) throws IOException{
+		
+		ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+		teamController = (ITeamController) context.getBean("teamController");
+		leagueController = (ILeagueController) context.getBean("leagueController");
+		gameController = (IGameController) context.getBean("gameController");
+		
 		boolean run = true; 
 		String choice = null; 
 		int choiceNum = 0;
@@ -90,7 +104,7 @@ public class GUI{
 		br = new BufferedReader(new InputStreamReader(System.in));
 		leagueName = br.readLine();
 		
-		addTeam = LMS.addTeam(teamName, leagueName); 
+		addTeam = leagueController.addTeam(teamName, leagueName); 
 		
 		if(addTeam){
 			System.out.println("The team: " + teamName + " has been added to the league: " + leagueName + "\n");
@@ -105,8 +119,9 @@ public class GUI{
 		String note = null; 
 		int gameID = 0;
 		
-		
-		addNote = TMS.addNoteToGame(note, gameID);
+		// TODO note that addGameNote is currently in IGameController, we have to go off use case so
+		// we'll check that at some point.
+		//addNote = teamController.addNoteToGame(note, gameID);
 	}
 
 	private static void  GuiAddNotetoTeam() throws IOException {
@@ -132,7 +147,7 @@ public class GUI{
 		br = new BufferedReader(new InputStreamReader(System.in));
 		team2 = br.readLine();
 		
-		createdGame = GMS.createGame(team1, team2);
+		createdGame = gameController.createGame(team1, team2);
 		
 		if(createdGame){
 			System.out.println("Game has been created with Team 1: " + team1 + " and Team 2: " + team2 + "\n");
@@ -188,7 +203,7 @@ public class GUI{
 			playerWeight = Double.parseDouble(playerWeightString);
 		}
 		
-		createdPlayer = TMS.createPlayer(playerFirstName, playerLastName, playerNumber, playerTeamName, playerPosition, playerWeight);
+		createdPlayer = teamController.createPlayer(playerFirstName, playerLastName, playerNumber, playerTeamName, playerPosition, playerWeight);
 		if(createdPlayer){
 			System.out.println("Your player: " + playerFirstName + playerLastName + ", number " + playerNumber + ", position " + 
 					playerPosition + "has been created");
@@ -208,7 +223,7 @@ public class GUI{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		teamName = br.readLine();
 		
-		createdTeam = TMS.addTeam(teamName);
+		createdTeam = teamController.addTeam(teamName);
 		
 		if(createdTeam){
 			System.out.println("Your team has been created with the name: " + teamName + "\n");
@@ -225,7 +240,7 @@ public class GUI{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		leagueName = br.readLine();
 		
-		createdLeague = LMS.addLeague(leagueName);
+		createdLeague = leagueController.addLeague(leagueName);
 		
 		if(createdLeague){
 			System.out.println("Your new league has been created with the name: " + leagueName + "\n");

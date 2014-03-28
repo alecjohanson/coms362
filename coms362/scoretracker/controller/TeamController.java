@@ -26,11 +26,8 @@ public class TeamController implements ITeamController {
 		tms.addNoteToPlayer(playerName, teamName, note);
 	}
 
-	public void addNotetoTeam(int teamID, String note) {
-		String teamName = "";
-		TeamManagementSystem tms = new TeamManagementSystem();
-		tms.addNoteToTeam(note, teamName);
-
+	public void addNotetoTeam(String teamName, String note) {
+		teamManager.addNoteToTeam(note, teamName);
 	}
 
 	public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
