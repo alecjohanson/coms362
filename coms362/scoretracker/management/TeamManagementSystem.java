@@ -17,49 +17,47 @@ import coms362.scoretracker.model.Team;
 
 @Service
 public class TeamManagementSystem implements ITeamManagementSystem {
-	
+
 	@Autowired
 	private ITeamDAO teamDAO;
-	
+
 	public TeamManagementSystem() {
-		
+
 	}
-	
-    public ITeam getTeam(String teamName) {
-       //
-    	return null;
-    }
 
-    public boolean addNoteToPlayer(String playerID, String teamID, String note) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+	public ITeam getTeam(String teamName) {
+		//
+		return null;
+	}
 
-    public boolean addNoteToTeam(String note, String teamName) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
-    }
+	public boolean addNoteToPlayer(String playerID, String teamID, String note) {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	}
 
-    public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
-    	try {
-        	ITeam curTeam = teamDAO.getTeam(team);
-        	if (curTeam == null)
-        		return false;
-        	curTeam.addPlayer(new Player(firstName, lastName, number, position, weight));
-        	teamDAO.putTeam((ITeam)curTeam);
-        	return true;
-        	
-        } catch (Exception ex) {
-        	ex.printStackTrace();
-        	return false;
-        }
-    }
+	public boolean addNoteToTeam(String note, String teamName) {
+		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	}
 
-	@Override
+	public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
+		try {
+			ITeam curTeam = teamDAO.getTeam(team);
+			if (curTeam == null)
+				return false;
+			curTeam.addPlayer(new Player(firstName, lastName, number, position, weight));
+			teamDAO.putTeam((ITeam) curTeam);
+			return true;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
 	public boolean addNoteToGame(String note, int gameID) {
 		// TODO Auto-generated method stub
-		return;
+		return false;
 	}
 
-	@Override
 	public boolean addTeam(String teamName) {
 		try {
 			ITeam team = new Team(teamName);

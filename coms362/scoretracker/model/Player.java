@@ -15,6 +15,7 @@ public class Player implements IPlayer
 	private String position;
 	private double weight;
 	private int rowid;
+	private String note;
 	
 	public Player(String firstName, String lastName, int number, String position, double weight) {
 		this.firstName = firstName;
@@ -24,9 +25,9 @@ public class Player implements IPlayer
 		this.weight = weight;
 	}
 	
-    public void addNote(String note) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+	public void addNote(String note) {
+		this.note = note;
+	}
 
 	public String getFirstName() {
 		return firstName;

@@ -28,7 +28,6 @@ public class LeagueDAO implements ILeagueDAO {
 		
 	}
 	
-	@Override
 	public void addLeague(ILeague league) {
 		
 		String sql = "INSERT INTO league " + "(leaguename) VALUES (?)";
@@ -41,7 +40,6 @@ public class LeagueDAO implements ILeagueDAO {
 
 	}
 
-	@Override
 	public ILeague getLeague(String league) {
 		String sql = "SELECT * FROM league WHERE leaguename = ?";
 		
@@ -52,7 +50,6 @@ public class LeagueDAO implements ILeagueDAO {
 		return returnTeam;
 	}
 
-	@Override
 	public void putLeague(ILeague league) {
 		String sql = "INSERT INTO league_team_map (leagueid, teamid) VALUES(?,?)";
 		jdbcTemplate = new JdbcTemplate(dataSource);

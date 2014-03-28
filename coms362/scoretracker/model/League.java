@@ -10,7 +10,7 @@ import java.util.List;
  * Time: 11:01 AM
  */
 public class League implements ILeague {
-	
+
 	private List<ITeam> teams;
 	private List<ITeam> newTeams;
 	private String leagueName;
@@ -21,19 +21,19 @@ public class League implements ILeague {
 		this.setTeams(new ArrayList<ITeam>());
 		this.newTeams = new ArrayList<ITeam>();
 	}
-	
-    public boolean addToLeague(ITeam team) {
-    	newTeams.add(team);
-    	return true;
-    }
-    
-    public String getLeagueName() {
-    	return this.leagueName;
-    }
-    
-    public void setLeagueName(String name) {
-    	this.leagueName = name;
-    }
+
+	public boolean addToLeague(ITeam team) {
+		newTeams.add(team);
+		return true;
+	}
+
+	public String getLeagueName() {
+		return this.leagueName;
+	}
+
+	public void setLeagueName(String name) {
+		this.leagueName = name;
+	}
 
 	public int getLeagueId() {
 		return leagueId;
@@ -50,7 +50,7 @@ public class League implements ILeague {
 	public void setTeams(List<ITeam> teams) {
 		this.teams = teams;
 	}
-	
+
 	public List<ITeam> getNewTeams() {
 		return this.newTeams;
 	}
