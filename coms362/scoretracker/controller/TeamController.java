@@ -12,28 +12,29 @@ import coms362.scoretracker.management.TeamManagementSystem;
  * Time: 11:42 AM
  */
 public class TeamController implements ITeamController {
-	
+
 	@Autowired
 	private ITeamManagementSystem teamManager;
-    
+
 	public boolean addTeam(String teamName) {
-        return teamManager.addTeam(teamName);    }
+		return teamManager.addTeam(teamName);
+	}
 
-    public void addNotetoPlayer(String playerName, int teamID, String note) {
-        TeamManagementSystem tms = new TeamManagementSystem();
-        String teamName="";
-        tms.addNoteToPlayer(playerName, teamName, note);
-    }
+	public void addNotetoPlayer(String playerName, int teamID, String note) {
+		TeamManagementSystem tms = new TeamManagementSystem();
+		String teamName = "";
+		tms.addNoteToPlayer(playerName, teamName, note);
+	}
 
-    public void addNotetoTeam(int teamID, String note) {
-        String teamName= "";
-        TeamManagementSystem tms = new TeamManagementSystem();
-        tms.addNoteToTeam(note,teamName);
+	public void addNotetoTeam(int teamID, String note) {
+		String teamName = "";
+		TeamManagementSystem tms = new TeamManagementSystem();
+		tms.addNoteToTeam(note, teamName);
 
-    }
+	}
 
-    public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
-        return teamManager.createPlayer(firstName, lastName, number, team, position, weight);
+	public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight) {
+		return teamManager.createPlayer(firstName, lastName, number, team, position, weight);
 
-    }
+	}
 }

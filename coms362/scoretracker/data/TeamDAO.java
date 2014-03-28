@@ -34,7 +34,6 @@ public class TeamDAO implements ITeamDAO {
 		
 	}
 	
-	@Override
 	public void addTeam(ITeam team) {
 	
 		String sql = "INSERT INTO team " + "(teamname) VALUES (?)";
@@ -46,7 +45,6 @@ public class TeamDAO implements ITeamDAO {
 		System.out.println("Team Added: " + team.getTeamName());
 	}
 
-	@Override
 	public ITeam getTeam(String team) {
 		String sql = "SELECT * FROM team WHERE teamname = ?";
 		
@@ -57,7 +55,6 @@ public class TeamDAO implements ITeamDAO {
 		return returnTeam;
 	}
 
-	@Override
 	public void putTeam(ITeam team) {
 		String sql = "INSERT INTO team_player_map (first_name, last_name, number, team, position, weight) VALUES(?,?,?,?,?,?)";
 		jdbcTemplate = new JdbcTemplate(dataSource);

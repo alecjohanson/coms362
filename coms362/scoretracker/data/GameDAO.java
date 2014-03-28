@@ -11,13 +11,11 @@ public class GameDAO implements IGameDAO {
 		
 	}
 	
-	@Override
 	public IGame getGame(int gameID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void putGame(IGame game) {
 		// TODO Auto-generated method stub
 

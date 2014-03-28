@@ -17,41 +17,41 @@ import coms362.scoretracker.model.Team;
  */
 
 @Service
-public class LeagueManagementSystem implements ILeagueManagementSystem{
-	
+public class LeagueManagementSystem implements ILeagueManagementSystem {
+
 	@Autowired
 	private ILeagueDAO leagueDAO;
-	
+
 	@Autowired
 	private ITeamDAO teamDAO;
-	
-	public LeagueManagementSystem() {
-		
-	}
-	
-    public boolean addTeam(String teamName, String leagueName) {
-        try {
-        	ILeague curLeague = leagueDAO.getLeague(leagueName);
-        	if (curLeague == null)
-        		return false;
-        	Team curTeam = (Team) teamDAO.getTeam(teamName);
-        	curLeague.addToLeague(curTeam);
-        	leagueDAO.putLeague((League) curLeague);
-        	return true;
-        } catch (Exception ex) {
-        	ex.printStackTrace();
-        	return false;
-        }
-    }
 
-    public boolean addLeague(String leagueName) {
-        try {
-        	League league = new League(leagueName);
-        	leagueDAO.addLeague(league);
-        	return true;
-        } catch (Exception ex) {
-        	ex.printStackTrace();
-        	return false;
-        }
-    }
+	public LeagueManagementSystem() {
+
+	}
+
+	public boolean addTeam(String teamName, String leagueName) {
+		try {
+			ILeague curLeague = leagueDAO.getLeague(leagueName);
+			if (curLeague == null)
+				return false;
+			Team curTeam = (Team) teamDAO.getTeam(teamName);
+			curLeague.addToLeague(curTeam);
+			leagueDAO.putLeague((League) curLeague);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean addLeague(String leagueName) {
+		try {
+			League league = new League(leagueName);
+			leagueDAO.addLeague(league);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
 }
