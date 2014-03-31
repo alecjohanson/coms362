@@ -117,7 +117,22 @@ public class GUI{
 		// TODO Auto-generated method stub
 		boolean addNote = false;
 		String note = null; 
+		int teamID = 0; 
 		int gameID = 0;
+		
+		/*System.out.println("Please enter the team ID: ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		teamID = Integer.parseInt(br.readLine());
+		
+		System.out.println("Please enter the game ID: ");
+		br = new BufferedReader(new InputStreamReader(System.in));
+		gameID = Integer.parseInt(br.readLine());
+		
+		System.out.println("Please enter the note: ");
+		br = new BufferedReader(new InputStreamReader(System.in));
+		note = br.readLine();
+		
+		gameController.addGameNote(teamID, gameID, note);*/
 		
 		// TODO note that addGameNote is currently in IGameController, we have to go off use case so
 		// we'll check that at some point.
@@ -126,14 +141,48 @@ public class GUI{
 
 	private static void  GuiAddNotetoTeam() throws IOException {
 		// TODO Auto-generated method stub
+		//boolean addNote = false; 
+		String note = null;
+		int teamID = 0; 
 		
+		System.out.println("Please enter the team ID: ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		teamID = Integer.parseInt(br.readLine());
+		
+		System.out.println("Please enter the note: ");
+		br = new BufferedReader(new InputStreamReader(System.in));
+		note = br.readLine();
+		
+		teamController.addNotetoTeam(teamID, note);
+		
+		System.out.println("Your note was successfully added to " + teamID);
 	}
 
 	private static void GuiAddNotetoPlayer() throws IOException {
 		// TODO Auto-generated method stub
+		//boolean addNote = false; 
+		String note = null;
+		String PlayerName = null;
+		int teamID = 0; 
+		
+		System.out.println("Please enter the player name: ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		PlayerName = br.readLine();
+		
+		System.out.println("Please enter the team ID: ");
+		br = new BufferedReader(new InputStreamReader(System.in));
+		teamID = Integer.parseInt(br.readLine());
+		
+		System.out.println("Please enter the note: ");
+		br = new BufferedReader(new InputStreamReader(System.in));
+		note = br.readLine();
+		
+		teamController.addNotetoPlayer(PlayerName, teamID, note);
+		
+		System.out.println("Your note was successfully added to " + PlayerName+ "on team: " + teamID);
 		
 	}
-
+	
 	private static void GuicreateGame() throws IOException {
 		boolean createdGame = false;
 		String team1; 
