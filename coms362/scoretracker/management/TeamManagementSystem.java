@@ -26,11 +26,10 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 	}
 
 	public ITeam getTeam(String teamName) {
-		//
-		return null;
+		teamDAO.getTeam(teamName);
 	}
 
-	public boolean addNoteToPlayer(String playerID, String teamID, String note) {
+	public boolean addNoteToPlayer(String playerID, int teamID, String note) {
 		return false;  //To change body of implemented methods use File | Settings | File Templates.
 	}
 
