@@ -73,7 +73,7 @@ public class TeamDAO implements ITeamDAO {
 		
 	}
 	
-	private List<Player> getPlayers(int teamid) {
+	public List<Player> getPlayers(int teamid) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Player> players = new ArrayList<Player>();
 		

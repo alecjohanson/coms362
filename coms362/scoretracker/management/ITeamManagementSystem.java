@@ -10,7 +10,7 @@ import coms362.scoretracker.model.ITeam;
 public interface ITeamManagementSystem {
     public ITeam getTeam(String teamName);
     public boolean addTeam(String teamName);
-    public boolean addNoteToPlayer(String playerID, int teamID, String note);
+    public boolean addNoteToPlayer(int playerID, int teamID, String note);
     public boolean addNoteToTeam(String note, String teamName);
     public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight);
     public boolean addNoteToGame(String note, int gameID);

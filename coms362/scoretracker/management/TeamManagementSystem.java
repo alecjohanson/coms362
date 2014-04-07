@@ -8,6 +8,8 @@ import coms362.scoretracker.model.ITeam;
 import coms362.scoretracker.model.Player;
 import coms362.scoretracker.model.Team;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
@@ -29,8 +31,20 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 		return teamDAO.getTeam(teamName);
 	}
 
-	public boolean addNoteToPlayer(String playerID, int teamID, String note) {
-		return false;  //To change body of implemented methods use File | Settings | File Templates.
+	public boolean addNoteToPlayer(int playerID, int teamID, String note) {
+		List<Player> players = teamDAO.getPlayers(teamID);
+		Player player = null;
+		for(int i=0; i<players.size(); i++)
+		{
+			if (players.get(i).getRowid() == playerID)
+			{
+				player = players.get(i);
+			}
+		}
+		if (player == null)
+			return false;
+		else
+			player.addNote(note);
 	}
 
 	public boolean addNoteToTeam(String note, String teamName) {
