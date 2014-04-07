@@ -22,6 +22,7 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 
 	@Autowired
 	private ITeamDAO teamDAO;
+	private IGameDAO gameDAO;
 
 	public TeamManagementSystem() {
 
@@ -79,7 +80,17 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 	}
 
 	public boolean addNoteToGame(String note, int gameID) {
-		// TODO Auto-generated method stub
+		try {
+			IGame curGame = gameDAO.getGame(gameID);
+			if (curGame == null)
+				return false;
+			curGame.addNote(note);
+			gameDAO.putTeam(curGame);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
 		return false;
 	}
 

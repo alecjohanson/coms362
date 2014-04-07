@@ -17,6 +17,7 @@ public class GameController implements IGameController{
 	
 	@Autowired
 	IGameManagementSystem gameManager;
+	private ITeamManagementSystem teamManager;
 	
 	public boolean createGame(String team1, String team2) {
 		return false; //TODO implement method
@@ -24,7 +25,7 @@ public class GameController implements IGameController{
 	}
 
 	public void addGameNote(int teamID, int gameID, String note) {
-		//TODO implement method
+		teamManager.addNoteToGame(gameID, note);
 
 	}
 
