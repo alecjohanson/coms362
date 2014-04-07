@@ -26,7 +26,7 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 	}
 
 	public ITeam getTeam(String teamName) {
-		teamDAO.getTeam(teamName);
+		return teamDAO.getTeam(teamName);
 	}
 
 	public boolean addNoteToPlayer(String playerID, int teamID, String note) {
