@@ -44,7 +44,10 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 		if (player == null)
 			return false;
 		else
+		{
 			player.addNote(note);
+			return true;
+		}
 	}
 
 	public boolean addNoteToTeam(String note, String teamName) {
