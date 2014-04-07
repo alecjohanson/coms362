@@ -1,4 +1,5 @@
 package coms362.scoretracker.controller;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
@@ -7,7 +8,7 @@ package coms362.scoretracker.controller;
  */
 public interface ITeamController {
     public boolean addTeam(String teamName);
-    public void addNotetoPlayer(String playerName, int teamID, String note);
+    public void addNotetoPlayer(int playerID, int teamID, String note);
     public void addNotetoTeam(String teamName, String note);
     public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight);
 }
