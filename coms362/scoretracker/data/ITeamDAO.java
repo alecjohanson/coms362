@@ -1,6 +1,9 @@
 package coms362.scoretracker.data;
 
 import coms362.scoretracker.model.ITeam;
+import coms362.scoretracker.model.Player;
+
+import java.util.List;
 
 public interface ITeamDAO {
 	
@@ -16,7 +19,8 @@ public interface ITeamDAO {
 	 * @return
 	 */
 	ITeam getTeam(String team);
-	
+
+	public List<Player> getPlayers(int teamid);
 	/**
 	 * 
 	 * @param team
