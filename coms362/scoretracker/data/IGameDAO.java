@@ -1,6 +1,6 @@
 package coms362.scoretracker.data;
 
-import coms362.scoretracker.model.IGame;
+import coms362.scoretracker.model.Game;
 
 public interface IGameDAO {
 
@@ -9,12 +9,17 @@ public interface IGameDAO {
 	 * @param gameID
 	 * @return
 	 */
-	IGame getGame(int gameID);
+	Game getGame(int gameID);
 	
 	/**
 	 * 
 	 * @param game
 	 */
-	void putGame(IGame game);
+	void putGame(Game game);
+
+	int createCustomSport(String file);
 	
+	int startGame(int gameId);
+	
+	void stopGame(int gameId);
 }

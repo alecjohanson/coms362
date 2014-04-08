@@ -11,7 +11,10 @@ import java.util.List;
  * Time: 11:13 AM
  */
 public interface IGameController {
-    public boolean createGame(String team1, String team2);
+    public boolean createGame(String team1, String team2, String sport);
     public void addGameNote(int teamID, int gameID, String note);
 	public List<IGame> getGames();
+	public int createCustomSport(String file);
+	public boolean startGame(int gameId);
+	public boolean stopGame(int gameId);
 }
