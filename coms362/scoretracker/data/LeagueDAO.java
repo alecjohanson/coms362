@@ -69,7 +69,6 @@ public class LeagueDAO implements ILeagueDAO {
 			Team team = new Team((String)row.get("teamname"));
 			team.setTeamId((Integer)row.get("teamid"));
 			teams.add(team);
-			System.out.println(team);
 		}
 		return teams;
 	}

@@ -11,8 +11,9 @@ import java.util.List;
  */
 public class Game implements IGame {
 	public static int STATUS_NEW = 0;
-	public static int STATUS_INPROGRESS = 0;
-	public static int STATUS_COMPLETE = 0;
+	public static int STATUS_INPROGRESS = 1;
+    public static int STATUS_PAUSED = 2;
+	public static int STATUS_COMPLETE = 3;
 	
 	private List<String> notes;
 	private List<String> newNotes;
@@ -28,8 +29,8 @@ public class Game implements IGame {
 		this.team1 = team1;
 		this.team2 = team2;
 		this.sport = sport;
-		notes = new ArrayList<>();
-		newNotes = new ArrayList<>();
+		notes = new ArrayList<String>();
+		newNotes = new ArrayList<String>();
 	}
 
 	public void addNote(String note) {

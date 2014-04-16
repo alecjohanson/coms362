@@ -13,6 +13,7 @@ public class GameRowMapper implements RowMapper {
 		game.setGameId(rs.getInt("gameid"));
 		game.setTimeleft(rs.getLong("timeleft"));
 		game.setStarttime(rs.getLong("starttime"));
+        game.setStatus(rs.getInt("status"));
 		return game;
 	}
 }

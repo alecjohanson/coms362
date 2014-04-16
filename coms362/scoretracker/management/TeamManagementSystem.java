@@ -1,12 +1,11 @@
 package coms362.scoretracker.management;
 
+import coms362.scoretracker.data.IGameDAO;
+import coms362.scoretracker.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import coms362.scoretracker.data.ITeamDAO;
-import coms362.scoretracker.model.ITeam;
-import coms362.scoretracker.model.Player;
-import coms362.scoretracker.model.Team;
 
 import java.util.List;
 
@@ -81,17 +80,16 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 
 	public boolean addNoteToGame(String note, int gameID) {
 		try {
-			IGame curGame = gameDAO.getGame(gameID);
+			Game curGame = gameDAO.getGame(gameID);
 			if (curGame == null)
 				return false;
 			curGame.addNote(note);
-			gameDAO.putTeam(curGame);
+			gameDAO.putGame(curGame);
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return false;
 		}
-		return false;
 	}
 
 	public boolean addTeam(String teamName) {

@@ -21,5 +21,7 @@ public interface IGameDAO {
 	
 	int startGame(int gameId);
 	
-	void stopGame(int gameId);
+	int pauseGame(int gameId);
+
+    int logEvent(int eventId, int gameId, int playerId);
 }

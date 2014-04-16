@@ -54,7 +54,7 @@ public class TeamDAO implements ITeamDAO {
 	public ITeam getTeam(String team) {
 		
 		jdbcTemplate = new JdbcTemplate(dataSource);
-		
+
 		Team returnTeam = (Team) jdbcTemplate.queryForObject(GET_TEAM, new Object[] { team }, new TeamRowMapper());
 		returnTeam.setPlayers(getPlayers(returnTeam.getTeamId()));
 		returnTeam.setNotes(getNotesForTeam(returnTeam.getTeamId()));

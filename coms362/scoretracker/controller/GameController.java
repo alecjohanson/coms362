@@ -2,6 +2,7 @@ package coms362.scoretracker.controller;
 
 import java.util.List;
 
+import coms362.scoretracker.management.ITeamManagementSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import coms362.scoretracker.management.IGameManagementSystem;
@@ -24,8 +25,7 @@ public class GameController implements IGameController{
 	}
 
 	public void addGameNote(int teamID, int gameID, String note) {
-		teamManager.addNoteToGame(gameID, note);
-
+		teamManager.addNoteToGame(note, gameID);
 	}
 
 	public List<IGame> getGames() {
@@ -39,7 +39,17 @@ public class GameController implements IGameController{
 	public boolean startGame(int gameId) {
 		return gameManager.startGame(gameId);
 	}
-	public boolean stopGame(int gameId) {
-		return gameManager.stopGame(gameId);
+	public boolean pauseGame(int gameId) {
+		return gameManager.pauseGame(gameId);
 	}
+    public String logEvent(int eventId, int playerId, int gameId) {
+        int retval = gameManager.logEvent(eventId, playerId, gameId);
+        String message = "";
+        switch (retval) {
+            case 1: message = "Game not in progress"; break;
+            case 2: message = "Game doesn't exist"; break;
+            case 3: message = "Error - see logs"; break;
+        }
+        return message;
+    }
 }

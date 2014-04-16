@@ -16,5 +16,6 @@ public interface IGameController {
 	public List<IGame> getGames();
 	public int createCustomSport(String file);
 	public boolean startGame(int gameId);
-	public boolean stopGame(int gameId);
+	public boolean pauseGame(int gameId);
+    public String logEvent(int eventId, int playerId, int gameId);
 }

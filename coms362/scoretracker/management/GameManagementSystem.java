@@ -50,13 +50,22 @@ public class GameManagementSystem implements IGameManagementSystem{
     		return false;
     	}
     }
-    public boolean stopGame(int gameId) {
+    public boolean pauseGame(int gameId) {
     	try {
-    		gameDAO.stopGame(gameId);
+    		gameDAO.pauseGame(gameId);
     		return true;
     	} catch (Exception ex) {
     		System.out.println(ex);
     		return false;
     	}
+    }
+
+    public int logEvent(int eventId, int playerId, int gameId) {
+        try {
+            return gameDAO.logEvent(eventId, playerId, gameId);
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return 3;
+        }
     }
 }
