@@ -19,9 +19,8 @@ public class GameController implements IGameController{
 	IGameManagementSystem gameManager;
 	private ITeamManagementSystem teamManager;
 	
-	public boolean createGame(String team1, String team2) {
-		return false; //TODO implement method
-
+	public boolean createGame(String team1, String team2, String sport) {
+		return gameManager.createGame(team1, team2, sport);
 	}
 
 	public void addGameNote(int teamID, int gameID, String note) {
@@ -31,6 +30,16 @@ public class GameController implements IGameController{
 
 	public List<IGame> getGames() {
 		return null; //TODO implement method
-
+	}
+	
+	public int createCustomSport(String file)
+	{
+		return gameManager.createCustomSport(file);
+	}
+	public boolean startGame(int gameId) {
+		return gameManager.startGame(gameId);
+	}
+	public boolean stopGame(int gameId) {
+		return gameManager.stopGame(gameId);
 	}
 }

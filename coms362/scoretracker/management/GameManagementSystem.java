@@ -23,9 +23,40 @@ public class GameManagementSystem implements IGameManagementSystem{
 		
 	}
 
-    public boolean createGame(String team1, String team2) {
-        Game game = new Game(team1, team2);
-        //TODO: Add game where needed
-        return false;
+	public boolean createGame(String team1, String team2, String sport) {
+    	try {
+            Game game = new Game(team1, team2, sport);
+            game.setStatus(Game.STATUS_NEW);
+            gameDAO.putGame(game);
+            return true;
+    	} catch (Exception ex) {
+    		System.out.println(ex);
+    		return false;
+    	}
+    }
+    
+    public int createCustomSport(String file)
+    {
+    	return gameDAO.createCustomSport(file);
+    }
+    
+    public boolean startGame(int gameId) 
+    {
+    	try {
+    		gameDAO.startGame(gameId);
+    		return true;
+    	} catch (Exception ex) {
+    		System.out.println(ex);
+    		return false;
+    	}
+    }
+    public boolean stopGame(int gameId) {
+    	try {
+    		gameDAO.stopGame(gameId);
+    		return true;
+    	} catch (Exception ex) {
+    		System.out.println(ex);
+    		return false;
+    	}
     }
 }
