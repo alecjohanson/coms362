@@ -1,6 +1,7 @@
 package coms362.scoretracker.data;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -19,13 +20,13 @@ import coms362.scoretracker.model.Team;
 public class GameDAO implements IGameDAO {
 
 	/* SQL STATIC STRINGS */
-	private static final String PUT_GAME = "INSERT INTO game (team1, team2, status, sport) VALUES (?,?,?,?)";
+	private static final String PUT_GAME = "INSERT INTO game (team1, team2, status, starttime, timeleft, sport) VALUES (?,?,?,?,?,?)";
 	private static final String GET_TEAM = "SELECT * FROM team WHERE teamname = ?";
 	private static final String GET_GAME = "SELECT * FROM game WHERE gameid = ?";
 	private static final String PUT_GAME_EVENT = "INSERT INTO game_event (sport, name, points) VALUES (?,?,?)";
 	private static final String PUT_SPORT = "INSERT INTO sport (sportname, timelength) VALUES (?,?)";
 	private static final String GET_GAME_LENGTH = "SELECT timelength FROM sport WHERE sportname = ?";
-	private static final String START_GAME = "UPDATE game SET status = ?, starttime = ?, timeleft = ? WHERE gameid = ?";
+	private static final String START_GAME = "UPDATE game SET status = ? WHERE gameid = ?";
 	private static final String PAUSE_GAME = "UPDATE game SET status = ?, timeleft = ? WHERE gameid = ?";
 	private static final String LOG_EVENT = "INSERT INTO game_event_map (eventid, playerid, time, gameid) VALUES (?,?,?,?)";
 
@@ -49,15 +50,22 @@ public class GameDAO implements IGameDAO {
 		return ret;
 	}
 
-	public void putGame(Game game) {
-		
-		if (verifyTeams(game)) {
-			if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
-			jdbcTemplate.update(PUT_GAME, new Object[] { game.getTeam1(), game.getTeam2(),
-							game.getStatus(), game.getSport() });
-		}
-		else {
-			throw new NullPointerException("Invalid team names");
+	public int putGame(Game game) {
+		game.setTimeleft(getGameLengthFromSport(game.getSport()) * 60000);
+		if (game.getStarttime() == null)
+			game.setStarttime(System.currentTimeMillis());
+		int verification = verifyTeams(game);
+		try {
+			if (verification == 0) {
+				if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
+				jdbcTemplate.update(PUT_GAME, new Object[] { game.getTeam1(),
+						game.getTeam2(), game.getStatus(), game.getStarttime(),
+						game.getTimeleft(), game.getSport() });
+				return verification;
+			} else
+				return verification;
+		} catch (Exception ex) {
+			return 3;
 		}
 	}
 	
@@ -82,10 +90,8 @@ public class GameDAO implements IGameDAO {
 		try {
             if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
 			Game game = getGame(gameId);
-			game.setTimeleft(getGameLengthFromSport(game.getSport()) * 60000);
 			game.setStatus(Game.STATUS_INPROGRESS);
-			game.setStarttime(System.currentTimeMillis());
-			jdbcTemplate.update(START_GAME, new Object[] { game.getStatus(), game.getStarttime(), game.getTimeleft(), gameId });
+			jdbcTemplate.update(START_GAME, new Object[] { game.getStatus(), gameId });
 			return 0;
 			// TODO Set error codes
 		} catch (Exception ex) {
@@ -119,6 +125,14 @@ public class GameDAO implements IGameDAO {
         return 0;
     }
 
+	public int addScheduledGame(String team1Name, String team2Name,
+			String sport, Calendar cal) {
+		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
+		Game game = new Game(team1Name, team2Name, sport);
+		game.setStarttime(cal.getTimeInMillis());
+		return putGame(game);
+	}
+
     private Long getGameLengthFromSport(String sport)
 	{
 		try {
@@ -146,15 +160,18 @@ public class GameDAO implements IGameDAO {
 		jdbcTemplate.batchUpdate(PUT_GAME_EVENT, input);
 	}
 	
-	private boolean verifyTeams(Game game) {
+	private int verifyTeams(Game game) {
         if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
 		try {
 			Team team1 = (Team) jdbcTemplate.queryForObject(GET_TEAM, new Object[] { game.getTeam1() }, new TeamRowMapper());
-			Team team2 = (Team) jdbcTemplate.queryForObject(GET_TEAM, new Object[] { game.getTeam2() }, new TeamRowMapper());
-			return true;
 		} catch (Exception ex) {
-			return false;
+			return 1;
+		} try {
+			Team team2 = (Team) jdbcTemplate.queryForObject(GET_TEAM, new Object[] { game.getTeam2() }, new TeamRowMapper());
+		} catch (Exception ex) {
+			return 2;
 		}
+		return 0;
 	}
 
 }

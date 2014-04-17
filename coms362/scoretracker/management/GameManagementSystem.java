@@ -1,5 +1,9 @@
 package coms362.scoretracker.management;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +27,11 @@ public class GameManagementSystem implements IGameManagementSystem{
 		
 	}
 
-	public boolean createGame(String team1, String team2, String sport) {
-    	try {
-            Game game = new Game(team1, team2, sport);
-            game.setStatus(Game.STATUS_NEW);
-            gameDAO.putGame(game);
-            return true;
-    	} catch (Exception ex) {
-    		System.out.println(ex);
-    		return false;
-    	}
-    }
+	public int createGame(String team1, String team2, String sport) {
+		Game game = new Game(team1, team2, sport);
+		game.setStatus(Game.STATUS_NEW);
+		return gameDAO.putGame(game);
+	}
     
     public int createCustomSport(String file)
     {
@@ -68,4 +66,20 @@ public class GameManagementSystem implements IGameManagementSystem{
             return 3;
         }
     }
+
+	/**
+	 * Note the date format fot the String date is: mm/dd/yyyy hh:mm aa
+	 */
+	public int addScheduledGame(String team1Name, String team2Name,
+			String sport, String date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy hh:mm aa");
+		Calendar cal = Calendar.getInstance();
+		try {
+			cal.setTime(sdf.parse(date));
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return 4;
+		}
+		return gameDAO.addScheduledGame(team1Name, team2Name, sport, cal);
+	}
 }
