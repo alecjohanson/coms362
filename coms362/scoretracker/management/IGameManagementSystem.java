@@ -1,4 +1,9 @@
 package coms362.scoretracker.management;
+
+import coms362.scoretracker.model.IGame;
+
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
@@ -10,4 +15,5 @@ public interface IGameManagementSystem {
     public int createCustomSport(String file);
     public boolean startGame(int gameId);
     public boolean stopGame(int gameId);
+	public String getGameStats(int gameId);
 }
