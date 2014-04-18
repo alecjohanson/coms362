@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import coms362.scoretracker.management.IGameManagementSystem;
 import coms362.scoretracker.model.IGame;
+import org.springframework.stereotype.Component;
 
 /**
  * Created with IntelliJ IDEA. User: alecjohanson Date: 3/28/14 Time: 10:54 AM
  */
+@Component
 public class GameController implements IGameController {
 
 	@Autowired
 	IGameManagementSystem gameManager;
+
 	private ITeamManagementSystem teamManager;
 
 	/**
@@ -99,19 +102,40 @@ public class GameController implements IGameController {
 				date);
 		String message = "";
 		switch (retval) {
-		case 1:
-			message = "Team 1 invalid";
-			break;
-		case 2:
-			message = "Team 2 invalid";
-			break;
-		case 3:
-			message = "Error - see logs";
-			break;
-		case 4:
-			message = "Invalid date";
-			break;
+            case 0:
+                message = "Game scheduled for " + date;
+                break;
+            case 1:
+                message = "Team 1 invalid";
+                break;
+            case 2:
+                message = "Team 2 invalid";
+                break;
+            case 3:
+                message = "Error - see logs";
+                break;
+            case 4:
+                message = "Invalid date";
+                break;
 		}
 		return message;
 	}
+
+    @Override
+    public String editScheduledGame(int gameId, String newTime) {
+        int retval = gameManager.editScheduledGame(gameId, newTime);
+        String message = "";
+        switch (retval) {
+            case 0:
+                message = "Game rescheduled for " + newTime;
+                break;
+            case 3:
+                message = "Error - see logs";
+                break;
+            case 4:
+                message = "Invalid date";
+                break;
+        }
+        return message;
+    }
 }

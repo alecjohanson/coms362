@@ -22,4 +22,6 @@ public interface IGameManagementSystem {
      */
 	public int addScheduledGame(String team1Name, String team2Name,
 			String sport, String date);
+
+    public int editScheduledGame(int gameId, String newTime);
 }

@@ -43,8 +43,10 @@ public interface IGameController {
 	 * @param team1Name Home team
 	 * @param team2Name Away team
 	 * @param sport Sport
-	 * @param time Scheduled date and time
+	 * @param time Date format fot the String date is: MM/dd/yyyy hh:mm aa
 	 * @return Error message -- see implemented method in {@link GameController#addScheduledGame}
 	 */
     public String addScheduledGame(String team1Name, String team2Name, String sport, String time);
+
+    public String editScheduledGame(int gameId, String newTime);
 }

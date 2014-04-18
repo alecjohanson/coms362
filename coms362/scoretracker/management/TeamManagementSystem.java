@@ -2,12 +2,15 @@ package coms362.scoretracker.management;
 
 import coms362.scoretracker.data.IGameDAO;
 import coms362.scoretracker.model.*;
+import coms362.scoretracker.stats.BasketballStats;
+import coms362.scoretracker.stats.BasketballStatsPrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import coms362.scoretracker.data.ITeamDAO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -92,7 +95,17 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 		}
 	}
 
-	public boolean addTeam(String teamName) {
+    public String getPlayerStats(String playerName) {
+        try {
+            Map<String, BasketballStats> stats = teamDAO.getTeamStats(playerName);
+            return BasketballStatsPrinter.prettyPrintStats(stats.get(playerName));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return "An error occured";
+        }
+    }
+
+    public boolean addTeam(String teamName) {
 		try {
 			ITeam team = new Team(teamName);
 			teamDAO.addTeam(team);

@@ -22,9 +22,10 @@ public class GameManagementSystem implements IGameManagementSystem{
 	
 	@Autowired
 	private IGameDAO gameDAO;
-	
+
+    private static SimpleDateFormat dateFormat;
 	public GameManagementSystem() {
-		
+        dateFormat = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
 	}
 
 	public int createGame(String team1, String team2, String sport) {
@@ -44,7 +45,7 @@ public class GameManagementSystem implements IGameManagementSystem{
     		gameDAO.startGame(gameId);
     		return true;
     	} catch (Exception ex) {
-    		System.out.println(ex);
+    		ex.printStackTrace();
     		return false;
     	}
     }
@@ -53,7 +54,7 @@ public class GameManagementSystem implements IGameManagementSystem{
     		gameDAO.pauseGame(gameId);
     		return true;
     	} catch (Exception ex) {
-    		System.out.println(ex);
+    		ex.printStackTrace();
     		return false;
     	}
     }
@@ -62,24 +63,34 @@ public class GameManagementSystem implements IGameManagementSystem{
         try {
             return gameDAO.logEvent(eventId, playerId, gameId);
         } catch (Exception ex) {
-            System.out.println(ex);
+            ex.printStackTrace();
             return 3;
         }
     }
 
 	/**
-	 * Note the date format fot the String date is: mm/dd/yyyy hh:mm aa
+	 *
 	 */
 	public int addScheduledGame(String team1Name, String team2Name,
 			String sport, String date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("mm/dd/yyyy hh:mm aa");
 		Calendar cal = Calendar.getInstance();
 		try {
-			cal.setTime(sdf.parse(date));
+			cal.setTime(dateFormat.parse(date));
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return 4;
 		}
-		return gameDAO.addScheduledGame(team1Name, team2Name, sport, cal);
+		return gameDAO.addScheduledGame(team1Name, team2Name, sport.toLowerCase(), cal);
 	}
+
+    public int editScheduledGame(int gameId, String newTime) {
+        Calendar cal = Calendar.getInstance();
+        try {
+            cal.setTime(dateFormat.parse(newTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return 4;
+        }
+        return gameDAO.editScheduledGame(gameId, cal);
+    }
 }

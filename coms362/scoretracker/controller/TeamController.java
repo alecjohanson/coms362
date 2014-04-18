@@ -3,7 +3,7 @@ package coms362.scoretracker.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import coms362.scoretracker.management.ITeamManagementSystem;
-import coms362.scoretracker.management.TeamManagementSystem;
+import org.springframework.stereotype.Component;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +11,7 @@ import coms362.scoretracker.management.TeamManagementSystem;
  * Date: 3/24/14
  * Time: 11:42 AM
  */
+@Component
 public class TeamController implements ITeamController {
 
 	@Autowired
@@ -32,4 +33,8 @@ public class TeamController implements ITeamController {
 		return teamManager.createPlayer(firstName, lastName, number, team, position, weight);
 
 	}
+
+    public String getPlayerStats(String playerName) {
+        return teamManager.getPlayerStats(playerName);
+    }
 }

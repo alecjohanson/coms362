@@ -24,6 +24,7 @@ public class Game implements IGame {
 	private String sport;
 	private Long starttime;
 	private Long timeleft;
+    private Long laststarttime;
 
 	public Game(String team1, String team2, String sport) {
 		this.team1 = team1;
@@ -108,4 +109,12 @@ public class Game implements IGame {
 	public void setSport(String sport) {
 		this.sport = sport;
 	}
+
+    public Long getLaststarttime() {
+        return laststarttime;
+    }
+
+    public void setLaststarttime(Long laststarttime) {
+        this.laststarttime = laststarttime;
+    }
 }

@@ -2,8 +2,10 @@ package coms362.scoretracker.data;
 
 import coms362.scoretracker.model.ITeam;
 import coms362.scoretracker.model.Player;
+import coms362.scoretracker.stats.BasketballStats;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ITeamDAO {
 	
@@ -26,5 +28,6 @@ public interface ITeamDAO {
 	 * @param team
 	 */
 	void putTeam(ITeam team);
-	
+
+    Map<String, BasketballStats> getTeamStats(String playerName);
 }

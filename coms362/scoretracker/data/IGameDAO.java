@@ -8,14 +8,14 @@ public interface IGameDAO {
 
 	/**
 	 * 
-	 * @param gameID
-	 * @return
+	 * @param gameID Game ID
+	 * @return Game, if found in database
 	 */
 	Game getGame(int gameID);
 	
 	/**
 	 * 
-	 * @param game
+	 * @param game Game to be put in database
 	 */
 	int putGame(Game game);
 
@@ -29,4 +29,6 @@ public interface IGameDAO {
 
 	int addScheduledGame(String team1Name, String team2Name, String sport,
 			Calendar cal);
+
+    int editScheduledGame(int gameId, Calendar cal);
 }
