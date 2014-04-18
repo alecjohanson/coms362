@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import coms362.scoretracker.stats.BasketballStats;
 import coms362.scoretracker.stats.BasketballStatsParser;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -91,8 +92,8 @@ public class TeamDAO implements ITeamDAO {
 		
 	}
 
-    public Map<String, BasketballStats> getTeamStats(String playerName) {
-        ITeam team = getTeamByPlayerName(playerName);
+    public Map<String, BasketballStats> getTeamStats(String teamName) {
+    	ITeam team = getTeam(teamName);
         BasketballStats teamStats = new BasketballStats();
         teamStats.setSubjectName(team.getTeamName());
         Map<String, BasketballStats> statsMap = new HashMap<String, BasketballStats>();
@@ -109,6 +110,11 @@ public class TeamDAO implements ITeamDAO {
         return statsMap;
     }
 
+	public Map<String, BasketballStats> getPlayerStats(String playerName) {
+        ITeam team = getTeamByPlayerName(playerName);
+        return getTeamStats(team.getTeamName());
+	}
+    
     public List<Player> getPlayers(int teamid) {
 		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Player> players = new ArrayList<Player>();

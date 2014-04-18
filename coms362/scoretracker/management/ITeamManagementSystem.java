@@ -15,4 +15,5 @@ public interface ITeamManagementSystem {
     public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight);
     public boolean addNoteToGame(String note, int gameID);
     String getPlayerStats(String playerName);
+	public String getTeamStats(String teamName);
 }

@@ -4,6 +4,7 @@ import coms362.scoretracker.data.IGameDAO;
 import coms362.scoretracker.model.*;
 import coms362.scoretracker.stats.BasketballStats;
 import coms362.scoretracker.stats.BasketballStatsPrinter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,7 +98,7 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 
     public String getPlayerStats(String playerName) {
         try {
-            Map<String, BasketballStats> stats = teamDAO.getTeamStats(playerName);
+            Map<String, BasketballStats> stats = teamDAO.getPlayerStats(playerName);
             return BasketballStatsPrinter.prettyPrintStats(stats.get(playerName));
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -113,6 +114,17 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return false;
+		}
+	}
+
+	@Override
+	public String getTeamStats(String teamName) {
+		try {
+			Map<String, BasketballStats> stats = teamDAO.getTeamStats(teamName);
+			return BasketballStatsPrinter.prettyPrintStats(stats.get(teamName));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return "An error occured";
 		}
 	}
 }

@@ -37,4 +37,8 @@ public class TeamController implements ITeamController {
     public String getPlayerStats(String playerName) {
         return teamManager.getPlayerStats(playerName);
     }
+    
+    public String getTeamStats(String teamName) {
+    	return teamManager.getTeamStats(teamName);
+    }
 }

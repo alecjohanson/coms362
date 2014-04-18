@@ -12,4 +12,5 @@ public interface ITeamController {
     public void addNotetoTeam(String teamName, String note);
     public boolean createPlayer(String firstName, String lastName, int number, String team, String position, double weight);
     public String getPlayerStats(String playerName);
+    public String getTeamStats(String playerName);
 }

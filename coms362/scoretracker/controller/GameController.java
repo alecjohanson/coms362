@@ -50,7 +50,7 @@ public class GameController implements IGameController {
 	}
 	
 	public String getGameStats(int gameID) {
-		gameManager.getGameStats(gameID);
+		return gameManager.getGameStats(gameID);
 	}
 
 	public List<IGame> getGames() {

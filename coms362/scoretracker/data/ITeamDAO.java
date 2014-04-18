@@ -29,5 +29,6 @@ public interface ITeamDAO {
 	 */
 	void putTeam(ITeam team);
 
-    Map<String, BasketballStats> getTeamStats(String playerName);
+    Map<String, BasketballStats> getTeamStats(String teamName);
+    Map<String, BasketballStats> getPlayerStats(String playerName);
 }

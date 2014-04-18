@@ -45,6 +45,7 @@ public class GameDAO implements IGameDAO {
         try {
             ret = (Game) jdbcTemplate.queryForObject(GET_GAME, new Object[]{gameID}, new GameRowMapper());
         } catch (Exception ex) {
+        	ex.printStackTrace();
             return null;
         }
 		return ret;

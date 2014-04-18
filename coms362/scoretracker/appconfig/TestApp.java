@@ -20,11 +20,12 @@ public class TestApp {
 		ILeagueController leagueController = (ILeagueController) context.getBean("leagueController");
 		IGameController gameController = (IGameController) context.getBean("gameController");
 
-
+		System.out.println(teamController.getTeamStats("Iowa State Cyclones"));
 		System.out.println(teamController.getPlayerStats("Melvin Ejim"));
-
-
-		//teamController.addTeam("Oklahoma Sooners");
+		System.out.println(teamController.getPlayerStats("DeAndre Kane"));
+/*
+		teamController.addTeam("Kansas Jayhawks");
+		teamController.addTeam("Oklahoma Sooners");*/
 //		if (teamController.createPlayer("Naz", "Long", 10, "Iowa State Cyclones", "G", 190))
 //			System.out.println("Success");
 //		else
@@ -35,7 +36,7 @@ public class TestApp {
 //		else
 //			System.out.println("Failed");
 //		
-		/*if (leagueController.addTeam("Oklahoma Sooners", "Big 12"))
+		/*if (leagueController.addTeam("Kansas Jayhawks", "Big 12") && leagueController.addTeam("Oklahoma Sooners", "Big 12"))
 			System.out.println("Success");
 		else
 			System.out.println("Failed");*/
@@ -45,38 +46,40 @@ public class TestApp {
 		
 		/*gameController.startGame(2);
 		gameController.stopGame(1);*/
-        //gameController.createGame("Iowa State Cyclones", "Kansas Jayhawks", "Basketball");
-        /*gameController.startGame(4);
-        gameController.logEvent(5, 6, 4);
-        gameController.logEvent(5, 6, 4);
-        gameController.logEvent(5, 6, 4);
-        gameController.logEvent(6, 6, 4);
-        gameController.logEvent(7, 6, 4);
-        gameController.logEvent(7, 6, 4);
-        gameController.logEvent(7, 6, 4);
-        gameController.logEvent(7, 6, 4);
-        gameController.logEvent(7, 6, 4);
-        gameController.logEvent(7, 6, 4);
-        gameController.logEvent(7, 6, 4);
+        //gameController.addScheduledGame("Iowa State Cyclones", "Kansas Jayhawks", "Basketball", "4/24/2014 6:00 pm");
+        //gameController.addScheduledGame("Iowa State Cyclones", "Oklahoma Sooners", "Basketball", "4/29/2014 6:00 pm");
+        gameController.startGame(4);
+        gameController.startGame(3);
+        /*gameController.logEvent(5, 6, 3);
+        gameController.logEvent(5, 6, 3);
+        gameController.logEvent(5, 6, 3);
+        gameController.logEvent(6, 6, 3);
+        gameController.logEvent(7, 6, 3);
+        gameController.logEvent(7, 6, 3);
+        gameController.logEvent(7, 6, 3);
+        gameController.logEvent(7, 6, 3);
+        gameController.logEvent(7, 6, 3);
+        gameController.logEvent(7, 6, 3);
+        gameController.logEvent(7, 6, 3);*/
         System.out.println("Sleeping...");
         Thread.sleep(2000);
-        gameController.logEvent(1, 6, 4);
-        gameController.logEvent(1, 6, 4);
-        gameController.logEvent(1, 6, 4);
-        gameController.logEvent(3, 6, 4);
-        gameController.logEvent(1, 6, 4);
-        gameController.logEvent(3, 6, 4);
-        gameController.logEvent(5, 6, 4);
-        gameController.logEvent(5, 6, 4);
-        gameController.logEvent(5, 6, 4);
-        gameController.logEvent(6, 6, 4);
-        gameController.logEvent(9, 6, 4);
-        gameController.logEvent(10, 6, 4);
-        gameController.logEvent(11, 6, 4);
-        gameController.logEvent(12, 6, 4);
-        gameController.logEvent(12, 6, 4);
+        gameController.logEvent(3, 3, 3);
+        gameController.logEvent(3, 3, 3);
+        gameController.logEvent(3, 3, 3);
+        gameController.logEvent(4, 4, 3);
+        gameController.logEvent(1, 4, 3);
+        gameController.logEvent(4, 4, 3);
+        gameController.logEvent(5, 4, 3);
+        gameController.logEvent(5, 4, 3);
+        gameController.logEvent(5, 4, 3);
+        gameController.logEvent(6, 4, 3);
+        gameController.logEvent(9, 4, 3);
+        gameController.logEvent(10, 3, 3);
+        gameController.logEvent(11, 3, 3);
+        gameController.logEvent(12, 3, 3);
+        gameController.logEvent(12, 3, 3);
         System.out.println("Sleeping...");
-        Thread.sleep(2000);
+        /*Thread.sleep(2000);
         gameController.logEvent(1, 4, 4);
         gameController.logEvent(1, 4, 4);
         gameController.logEvent(1, 4, 4);
@@ -170,9 +173,10 @@ public class TestApp {
         gameController.logEvent(1, 4, 3);
         gameController.logEvent(1, 4, 3);
         gameController.logEvent(3, 4, 3);
-        gameController.logEvent(1, 4, 3);
-        gameController.pauseGame(4);*/
+        gameController.logEvent(1, 4, 3);*/
+        gameController.pauseGame(4);
+        gameController.pauseGame(3);
         //System.out.println(gameController.addScheduledGame("Iowa State Cyclones", "Kansas Jayhawks", "Basketball", "4/29/2014 8:00 pm"));
-        //System.out.println(gameController.editScheduledGame(5, "4/29/2014 7:00 pm"));
+        //System.out.println(gameController.editScheduledGame(5, "4/29/2014 7:00 pm"));*/
     }
 }
