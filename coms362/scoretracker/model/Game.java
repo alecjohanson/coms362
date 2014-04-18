@@ -11,8 +11,9 @@ import java.util.List;
  */
 public class Game implements IGame {
 	public static int STATUS_NEW = 0;
-	public static int STATUS_INPROGRESS = 0;
-	public static int STATUS_COMPLETE = 0;
+	public static int STATUS_INPROGRESS = 1;
+    public static int STATUS_PAUSED = 2;
+	public static int STATUS_COMPLETE = 3;
 	
 	private List<String> notes;
 	private List<String> newNotes;
@@ -24,13 +25,14 @@ public class Game implements IGame {
 	private Long starttime;
 	private Long timeleft;
 	private ITeam winner;
+    private Long laststarttime;
 
 	public Game(String team1, String team2, String sport) {
 		this.team1 = team1;
 		this.team2 = team2;
 		this.sport = sport;
-		notes = new ArrayList<>();
-		newNotes = new ArrayList<>();
+		notes = new ArrayList<String>();
+		newNotes = new ArrayList<String>();
 	}
 
 	public void addNote(String note) {
@@ -112,9 +114,15 @@ public class Game implements IGame {
 	public void setSport(String sport) {
 		this.sport = sport;
 	}
-
 	public String getStats()
 	{
 		return "Winner was " + winner.getTeamName();
 	}
+    public Long getLaststarttime() {
+        return laststarttime;
+    }
+
+    public void setLaststarttime(Long laststarttime) {
+        this.laststarttime = laststarttime;
+    }
 }

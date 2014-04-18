@@ -36,7 +36,7 @@ public class CustomGameParser {
 	public static List<GameEvent> parseEvents(String file) 
 	{
 		BufferedReader br;
-		List<GameEvent> ret = new ArrayList<>();
+		List<GameEvent> ret = new ArrayList<GameEvent>();
 		try {
 			File input = new File(file);
 			if (!input.exists())

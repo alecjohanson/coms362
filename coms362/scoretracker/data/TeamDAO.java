@@ -3,14 +3,20 @@
  */
 package coms362.scoretracker.data;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
 
+import coms362.scoretracker.stats.BasketballStats;
+import coms362.scoretracker.stats.BasketballStatsParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import coms362.scoretracker.data.rowmapper.TeamRowMapper;
@@ -28,10 +34,13 @@ public class TeamDAO implements ITeamDAO {
 	/* SQL STATIC STRINGS */
 	public static final String ADD_TEAM = "INSERT INTO team " + "(teamname) VALUES (?)";
 	public static final String GET_TEAM = "SELECT * FROM team WHERE teamname = ?";
+    public static final String GET_TEAM_BY_ID = "SELECT * FROM team WHERE teamid = ?";
 	public static final String PUT_PLAYERS = "INSERT INTO team_player_map (first_name, last_name, number, team, position, weight) VALUES(?,?,?,?,?,?)";
 	public static final String PUT_TEAM_NOTES = "INSERT INTO team_notes (teamid, note) VALUES (?,?)";
 	public static final String GET_PLAYERS = "SELECT * FROM team_player_map WHERE team = ?";
 	public static final String GET_TEAM_NOTES = "SELECT * FROM team_notes WHERE teamid = ?";
+    public static final String FIND_TEAM_BY_PLAYER = "SELECT team FROM team_player_map WHERE first_name = ? AND last_name = ?";
+    public static final String GET_PLAYER_STATS = "SELECT * FROM game_event_map WHERE playerid = ?";
 	
 	@Autowired
 	private DataSource dataSource;
@@ -44,40 +53,67 @@ public class TeamDAO implements ITeamDAO {
 	
 	public void addTeam(ITeam team) {
 	
-		jdbcTemplate = new JdbcTemplate(dataSource);
+		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
 		
-		jdbcTemplate.update(ADD_TEAM, new Object[] { team.getTeamName() });
+		jdbcTemplate.update(ADD_TEAM, team.getTeamName());
 		
 		System.out.println("Team Added: " + team.getTeamName());
 	}
 
 	public ITeam getTeam(String team) {
 		
-		jdbcTemplate = new JdbcTemplate(dataSource);
-		
+		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
+
 		Team returnTeam = (Team) jdbcTemplate.queryForObject(GET_TEAM, new Object[] { team }, new TeamRowMapper());
 		returnTeam.setPlayers(getPlayers(returnTeam.getTeamId()));
 		returnTeam.setNotes(getNotesForTeam(returnTeam.getTeamId()));
 		return returnTeam;
 	}
 
+    public ITeam getTeamById(int teamid) {
+        if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
+
+        Team returnTeam = (Team) jdbcTemplate.queryForObject(GET_TEAM_BY_ID, new Object[] { teamid }, new TeamRowMapper());
+        returnTeam.setPlayers(getPlayers(returnTeam.getTeamId()));
+        returnTeam.setNotes(getNotesForTeam(returnTeam.getTeamId()));
+        return returnTeam;
+    }
+
 	public void putTeam(ITeam team) {
 			
-		jdbcTemplate = new JdbcTemplate(dataSource);
+		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
 		for (String note : team.getNewNotes()) {
-			jdbcTemplate.update(PUT_TEAM_NOTES, new Object[] {team.getTeamId(), note });
+			jdbcTemplate.update(PUT_TEAM_NOTES, team.getTeamId(), note);
 		}
 		for (Player p : team.getNewPlayers()) {
-			jdbcTemplate.update(PUT_PLAYERS, new Object[] { p.getFirstName(), p.getLastName(), p.getNumber(), team.getTeamId(), p.getPosition(), p.getWeight() });
+			jdbcTemplate.update(PUT_PLAYERS, p.getFirstName(), p.getLastName(), p.getNumber(), team.getTeamId(), p.getPosition(), p.getWeight());
 		}
 		
 	}
-	
-	public List<Player> getPlayers(int teamid) {
-		jdbcTemplate = new JdbcTemplate(dataSource);
+
+    public Map<String, BasketballStats> getTeamStats(String playerName) {
+        ITeam team = getTeamByPlayerName(playerName);
+        BasketballStats teamStats = new BasketballStats();
+        teamStats.setSubjectName(team.getTeamName());
+        Map<String, BasketballStats> statsMap = new HashMap<String, BasketballStats>();
+        BasketballStats playerStats;
+        List<Map<String, Object>> rawStats;
+        for (Player player : team.getPlayers()) {
+            rawStats = jdbcTemplate.queryForList(GET_PLAYER_STATS, player.getRowid());
+            playerStats = BasketballStatsParser.parseRowsIntoStats(rawStats);
+            playerStats.setSubjectName(player.getFirstName() + " " + player.getLastName());
+            statsMap.put(playerStats.getSubjectName(), playerStats);
+            teamStats.addBasketballStats(playerStats);
+        }
+        statsMap.put(team.getTeamName(), teamStats);
+        return statsMap;
+    }
+
+    public List<Player> getPlayers(int teamid) {
+		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
 		List<Player> players = new ArrayList<Player>();
 		
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(GET_PLAYERS, new Object[] { teamid } );
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(GET_PLAYERS, teamid);
 		for (Map row : rows) {
 			Player player = new Player((String)row.get("first_name"), (String)row.get("last_name"), (Integer)row.get("number"), (String)row.get("position"), (Double)row.get("weight"));
 			player.setRowid((Integer)row.get("team_player_id"));
@@ -85,21 +121,32 @@ public class TeamDAO implements ITeamDAO {
 		}
 		return players;
 	}
-	
+
+    private ITeam getTeamByPlayerName(String playerName) {
+        if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
+        String firstname = playerName.substring(0, playerName.lastIndexOf(' '));
+        String lastname = playerName.substring(playerName.lastIndexOf(' ')+1);
+        Integer teamid = (Integer) jdbcTemplate.queryForObject(FIND_TEAM_BY_PLAYER, new Object[]{firstname, lastname},
+                new RowMapper() {
+                    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        return rs.getInt(1);
+                    }
+                }
+        );
+        return getTeamById(teamid);
+    }
+    
 	private List<String> getNotesForTeam(int teamid) {
-		jdbcTemplate = new JdbcTemplate(dataSource);
+		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
 		List<String> notes = new ArrayList<String>();
 		
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(GET_TEAM_NOTES, new Object[] { teamid } );
+		List<Map<String, Object>> rows = jdbcTemplate.queryForList(GET_TEAM_NOTES, teamid);
 		for (Map row : rows) {
 			String note = (String)row.get("note");
 			notes.add(note);
 		}
 		return notes;
  	}
-	
-	public DataSource getDataSource() {
-		return dataSource;
-	}
+
 
 }
