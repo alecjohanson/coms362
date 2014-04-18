@@ -8,4 +8,7 @@ package coms362.scoretracker.model;
  */
 public interface IGame {
     public void addNote(String note);
+	public int getGameId();
+	public ITeam getWinner();
+	public String getStats();
 }

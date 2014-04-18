@@ -23,6 +23,7 @@ public class Game implements IGame {
 	private String sport;
 	private Long starttime;
 	private Long timeleft;
+	private ITeam winner;
 
 	public Game(String team1, String team2, String sport) {
 		this.team1 = team1;
@@ -34,6 +35,10 @@ public class Game implements IGame {
 
 	public void addNote(String note) {
 		this.newNotes.add(note);
+	}
+
+	public ITeam getWinner() {
+		return winner;
 	}
 
 	public List<String> getNotes() {
@@ -106,5 +111,10 @@ public class Game implements IGame {
 
 	public void setSport(String sport) {
 		this.sport = sport;
+	}
+
+	public String getStats()
+	{
+		return "Winner was " + winner.getTeamName();
 	}
 }

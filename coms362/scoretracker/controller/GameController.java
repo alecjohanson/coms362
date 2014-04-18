@@ -2,6 +2,8 @@ package coms362.scoretracker.controller;
 
 import java.util.List;
 
+import coms362.scoretracker.management.ITeamManagementSystem;
+import coms362.scoretracker.model.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import coms362.scoretracker.management.IGameManagementSystem;
@@ -28,10 +30,10 @@ public class GameController implements IGameController{
 
 	}
 
-	public List<IGame> getGames() {
-		return null; //TODO implement method
+	public String getGameStats(int gameID) {
+		gameManager.getGameStats(gameID);
 	}
-	
+
 	public int createCustomSport(String file)
 	{
 		return gameManager.createCustomSport(file);
