@@ -194,12 +194,12 @@ public class Game_Handler {
 
 	private static void GuiAddNotetoGame() throws IOException {
 		String note = null;
-		int teamID = 0;
+		//int teamID = 0;
 		int gameID = 0;
 
-		System.out.println("Please enter the team ID: ");
+		/*System.out.println("Please enter the team ID: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		teamID = Integer.parseInt(br.readLine());
+		teamID = Integer.parseInt(br.readLine());*/
 
 		System.out.println("Please enter the game ID: ");
 		br = new BufferedReader(new InputStreamReader(System.in));
@@ -209,7 +209,7 @@ public class Game_Handler {
 		br = new BufferedReader(new InputStreamReader(System.in));
 		note = br.readLine();
 
-		gameController.addGameNote(teamID, gameID, note);
+		gameController.addGameNote(/*teamID,*/ gameID, note);
 	}
 	private static void GuicreateGame() throws IOException {
 		String createdGame = null;

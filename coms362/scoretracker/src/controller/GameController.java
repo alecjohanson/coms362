@@ -1,13 +1,12 @@
-package coms362.scoretracker.controller;
+package controller;
 
 import java.util.List;
 
-import coms362.scoretracker.management.ITeamManagementSystem;
-import coms362.scoretracker.model.Game;
-import org.springframework.beans.factory.annotation.Autowired;
+import management.IGameManagementSystem;
+import management.ITeamManagementSystem;
+import model.IGame;
 
-import coms362.scoretracker.management.IGameManagementSystem;
-import coms362.scoretracker.model.IGame;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -45,7 +44,7 @@ public class GameController implements IGameController {
 		return message;
 	}
 
-	public void addGameNote(int teamID, int gameID, String note) {
+	public void addGameNote(/*int teamID,*/ int gameID, String note) {
 		teamManager.addNoteToGame(note, gameID);
 	}
 	
@@ -126,7 +125,6 @@ public class GameController implements IGameController {
 		return message;
 	}
 
-    @Override
     public String editScheduledGame(int gameId, String newTime) {
         int retval = gameManager.editScheduledGame(gameId, newTime);
         String message = "";

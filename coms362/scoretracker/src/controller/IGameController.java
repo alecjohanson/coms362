@@ -1,8 +1,5 @@
-package coms362.scoretracker.controller;
+package controller;
 
-import coms362.scoretracker.model.IGame;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,7 +18,7 @@ public interface IGameController {
 	 * @return Error message -- see implemented method in {@link GameController#createGame}
 	 */
     public String createGame(String team1, String team2, String sport);
-    public void addGameNote(int teamID, int gameID, String note);
+    public void addGameNote(/*int teamID, */int gameID, String note);
 	public String getGameStats(int gameID);
 	public int createCustomSport(String file);
 	public boolean startGame(int gameId);
