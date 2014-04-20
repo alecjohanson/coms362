@@ -38,9 +38,9 @@ public class Team implements ITeam {
 	 * @see coms362.scoretracker.model.Itemp#addNoteToGame(java.lang.String, int)
 	 */
 
-	public void addNoteToGame(String note, int gameID) {
+	/*public void addNoteToGame(String note, int gameID) {
 		//To change body of implemented methods use File | Settings | File Templates.
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see coms362.scoretracker.model.Itemp#addNote(java.lang.String)
