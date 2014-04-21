@@ -1,4 +1,4 @@
-package controller;
+package coms362.scoretracker.controller;
 
 
 /**

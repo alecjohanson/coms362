@@ -1,14 +1,18 @@
-package gui;
+package coms362.scoretracker.gui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import controller.IGameController;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import coms362.scoretracker.controller.IGameController;
 
 public class Game_Handler {
 
+	@Autowired
 	private static IGameController gameController;
+	
 	private static int gameIDforStartandPause; 
 	
 	static void Game_Handler_Method() throws IOException {
@@ -198,11 +202,11 @@ public class Game_Handler {
 		int gameID = 0;
 
 		/*System.out.println("Please enter the team ID: ");
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		teamID = Integer.parseInt(br.readLine());*/
-
+		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		System.out.println("Please enter the game ID: ");
-		br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		gameID = Integer.parseInt(br.readLine());
 
 		System.out.println("Please enter the note: ");
