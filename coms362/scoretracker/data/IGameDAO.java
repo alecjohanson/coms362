@@ -19,16 +19,20 @@ public interface IGameDAO {
 	 */
 	int putGame(Game game);
 
+	boolean updateGame(Game game);
+	
 	int createCustomSport(String file);
 	
-	int startGame(int gameId);
+	/*int startGame(int gameId);
 	
-	int pauseGame(int gameId);
-
+	int pauseGame(int gameId);*/
+	
     int logEvent(int eventId, int gameId, int playerId);
 
 	int addScheduledGame(String team1Name, String team2Name, String sport,
 			Calendar cal);
 
-    int editScheduledGame(int gameId, Calendar cal);
+    /*int editScheduledGame(int gameId, Calendar cal);
+
+	void finalizeGame(int gameId);*/
 }

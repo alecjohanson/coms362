@@ -23,6 +23,7 @@ public interface IGameController {
 	public int createCustomSport(String file);
 	public boolean startGame(int gameId);
 	public boolean pauseGame(int gameId);
+	public boolean finalizeGame(int gameId);
 	
 	/**
 	 * Adds an event given the game, player, and event ids. 

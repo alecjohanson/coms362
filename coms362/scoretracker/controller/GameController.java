@@ -67,6 +67,10 @@ public class GameController implements IGameController {
 	public boolean pauseGame(int gameId) {
 		return gameManager.pauseGame(gameId);
 	}
+	
+	public boolean finalizeGame(int gameId) {
+		return gameManager.finalizeGame(gameId);
+	}
 
 	/**
 	 * Error codes:<br><br>
