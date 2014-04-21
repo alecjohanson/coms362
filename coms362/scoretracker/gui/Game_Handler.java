@@ -1,14 +1,18 @@
-package gui;
+package coms362.scoretracker.gui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import controller.IGameController;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import coms362.scoretracker.controller.IGameController;
 
 public class Game_Handler {
 
+	@Autowired
 	private static IGameController gameController;
+	
 	private static int gameIDforStartandPause; 
 	
 	static void Game_Handler_Method() throws IOException {

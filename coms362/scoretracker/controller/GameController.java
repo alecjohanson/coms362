@@ -68,6 +68,10 @@ public class GameController implements IGameController {
 	public boolean pauseGame(int gameId) {
 		return gameManager.pauseGame(gameId);
 	}
+	
+	public boolean finalizeGame(int gameId) {
+		return gameManager.finalizeGame(gameId);
+	}
 
 	/**
 	 * Error codes:<br><br>
@@ -126,7 +130,6 @@ public class GameController implements IGameController {
 		return message;
 	}
 
-    @Override
     public String editScheduledGame(int gameId, String newTime) {
         int retval = gameManager.editScheduledGame(gameId, newTime);
         String message = "";

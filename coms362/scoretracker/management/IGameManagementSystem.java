@@ -30,4 +30,5 @@ public interface IGameManagementSystem {
 			String sport, String date);
 
     public int editScheduledGame(int gameId, String newTime);
+	public boolean finalizeGame(int gameId);
 }

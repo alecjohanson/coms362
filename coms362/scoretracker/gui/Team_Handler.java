@@ -1,12 +1,16 @@
-package gui;
+package coms362.scoretracker.gui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import controller.ITeamController;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import coms362.scoretracker.controller.ITeamController;
 
 public class Team_Handler {
+	
+	@Autowired
 	private static ITeamController teamController;
 
 	static void Team_Handler_Method() throws IOException {

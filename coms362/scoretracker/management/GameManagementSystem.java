@@ -1,9 +1,11 @@
 package coms362.scoretracker.management;
 
 import coms362.scoretracker.model.IGame;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,8 +54,10 @@ public class GameManagementSystem implements IGameManagementSystem{
     public boolean startGame(int gameId) 
     {
     	try {
-    		gameDAO.startGame(gameId);
-    		return true;
+    		Game game = gameDAO.getGame(gameId);
+			game.setStatus(Game.STATUS_INPROGRESS);
+			game.setLaststarttime(System.currentTimeMillis());
+            return gameDAO.updateGame(game);
     	} catch (Exception ex) {
     		ex.printStackTrace();
     		return false;
@@ -61,8 +65,23 @@ public class GameManagementSystem implements IGameManagementSystem{
     }
     public boolean pauseGame(int gameId) {
     	try {
-    		gameDAO.pauseGame(gameId);
-    		return true;
+    		Game game = gameDAO.getGame(gameId);
+    		Long curTime = System.currentTimeMillis();
+            game.setStatus(Game.STATUS_PAUSED);
+    		game.setTimeleft(game.getTimeleft() - (curTime - game.getLaststarttime()));
+    		return gameDAO.updateGame(game);
+    	} catch (Exception ex) {
+    		ex.printStackTrace();
+    		return false;
+    	}
+    }
+    
+    public boolean finalizeGame(int gameId) {
+    	try {
+    		Game game = gameDAO.getGame(gameId);
+    		game.setStatus(Game.STATUS_COMPLETE);
+    		game.setTimeleft(0L);
+    		return gameDAO.updateGame(game);
     	} catch (Exception ex) {
     		ex.printStackTrace();
     		return false;
@@ -95,12 +114,13 @@ public class GameManagementSystem implements IGameManagementSystem{
 
     public int editScheduledGame(int gameId, String newTime) {
         Calendar cal = Calendar.getInstance();
+        Game game = gameDAO.getGame(gameId);
         try {
             cal.setTime(dateFormat.parse(newTime));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return 4;
-        }
-        return gameDAO.editScheduledGame(gameId, cal);
+        } catch (ParseException e) {return 4;}
+        game.setStarttime(cal.getTimeInMillis());
+        if (gameDAO.updateGame(game))
+        	return 0;
+        return 1;
     }
 }

@@ -20,16 +20,18 @@ public class GameDAO implements IGameDAO {
 
 	/* SQL STATIC STRINGS */
 	private static final String PUT_GAME = "INSERT INTO game (team1, team2, status, starttime, timeleft, sport) VALUES (?,?,?,?,?,?)";
+	private static final String UPDATE_GAME = "UPDATE game SET status = ?, starttime = ?, timeleft = ?, laststarttime = ? WHERE gameid = ?";
 	private static final String GET_TEAM = "SELECT * FROM team WHERE teamname = ?";
 	private static final String GET_GAME = "SELECT * FROM game WHERE gameid = ?";
 	private static final String PUT_GAME_EVENT = "INSERT INTO game_event (sport, name, points) VALUES (?,?,?)";
 	private static final String PUT_SPORT = "INSERT INTO sport (sportname, timelength) VALUES (?,?)";
 	private static final String GET_GAME_LENGTH = "SELECT timelength FROM sport WHERE sportname = ?";
-    private static final String RESCHED_GAME = "UPDATE game SET starttime = ? WHERE gameid = ?";
-	private static final String START_GAME = "UPDATE game SET status = ?, laststarttime = ? WHERE gameid = ?";
-	private static final String PAUSE_GAME = "UPDATE game SET status = ?, timeleft = ? WHERE gameid = ?";
+    //private static final String RESCHED_GAME = "UPDATE game SET starttime = ? WHERE gameid = ?";
+	//private static final String START_GAME = "UPDATE game SET status = ?, laststarttime = ? WHERE gameid = ?";
+	//private static final String PAUSE_GAME = "UPDATE game SET status = ?, timeleft = ? WHERE gameid = ?";
 	private static final String LOG_EVENT = "INSERT INTO game_event_map (eventid, playerid, time, gameid) VALUES (?,?,?,?)";
-
+	//private static final String FINALIZE_GAME = "UPDATE game SET status = ?, timeleft = ? WHERE gameid = ?";
+	
     @Autowired
 	private DataSource dataSource;
 	
@@ -70,6 +72,20 @@ public class GameDAO implements IGameDAO {
 		}
 	}
 	
+	public boolean updateGame(Game game) {
+		try {
+			if (jdbcTemplate == null)
+				jdbcTemplate = new JdbcTemplate(dataSource);
+			jdbcTemplate.update(UPDATE_GAME, game.getStatus(),
+					game.getStarttime(), game.getTimeleft(),
+					game.getLaststarttime(), game.getGameId());
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+	}
+	
 	public int createCustomSport(String file)
 	{
 		try {
@@ -86,7 +102,7 @@ public class GameDAO implements IGameDAO {
 		}
 	}
 	
-	public int startGame(int gameId)
+	/*public int startGame(int gameId)
 	{
 		try {
             if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
@@ -113,6 +129,14 @@ public class GameDAO implements IGameDAO {
         // TODO Set error codes
         return 0;
 	}
+	
+	public void finalizeGame(int gameId) {
+		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
+		Game game = getGame(gameId);
+		game.setStatus(Game.STATUS_COMPLETE);
+		game.setTimeleft(0L);
+		jdbcTemplate.update(FINALIZE_GAME, game.getStatus(), game.getTimeleft(), gameId);
+	}*/
 
     public int logEvent(int eventId, int playerId, int gameId) {
         if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
@@ -135,7 +159,7 @@ public class GameDAO implements IGameDAO {
 		return putGame(game);
 	}
 
-    public int editScheduledGame(int gameId, Calendar cal) {
+    /*public int editScheduledGame(int gameId, Calendar cal) {
         try {
             if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
             jdbcTemplate.update(RESCHED_GAME, cal.getTimeInMillis(), gameId);
@@ -144,7 +168,7 @@ public class GameDAO implements IGameDAO {
             ex.printStackTrace();
             return 3;
         }
-    }
+    }*/
 
     private Long getGameLengthFromSport(String sport)
 	{

@@ -1,12 +1,16 @@
-package gui;
+package coms362.scoretracker.gui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import controller.ILeagueController;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import coms362.scoretracker.controller.ILeagueController;
 
 public class League_Handler {
+	
+	@Autowired
 	private static ILeagueController leagueController;
 
 	static void League_Handler_Method() throws IOException {
