@@ -4,10 +4,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class GUI{
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import coms362.scoretracker.appconfig.ApplicationConfig;
+
+public class GUI {
 
 	public static void main(String[] args) throws IOException {
 
+		ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+		
+		Team_Handler team_handler = new Team_Handler(context);
+		Game_Handler game_handler = new Game_Handler(context);
+		League_Handler league_handler = new League_Handler(context);
+		Player_Handler player_handler = new Player_Handler(context);
+		
 		boolean run = true;
 		String choice = null;
 		int category_choice = 0;
@@ -27,16 +39,16 @@ public class GUI{
 
 			switch (category_choice) {
 			case 1:
-				Player_Handler.Player_Handler_Method();
+				player_handler.Player_Handler_Method();
 				break;
 			case 2:
-				Team_Handler.Team_Handler_Method();
+				team_handler.Team_Handler_Method();
 				break;
 			case 3:
-				League_Handler.League_Handler_Method();
+				league_handler.League_Handler_Method();
 				break;
 			case 4:
-				Game_Handler.Game_Handler_Method();
+				game_handler.Game_Handler_Method();
 				break;
 			case 5:
 				run = false;

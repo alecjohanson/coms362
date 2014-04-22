@@ -4,24 +4,28 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import coms362.scoretracker.controller.IGameController;
 
 public class Game_Handler {
 
-	@Autowired
-	private static IGameController gameController;
+	private IGameController gameController;
 	
 	private static int gameIDforStartandPause; 
+	private ApplicationContext context;
 	
-	static void Game_Handler_Method() throws IOException {
+	public Game_Handler(ApplicationContext c) {
+		context = c;
+	}
+	
+	
+	void Game_Handler_Method() throws IOException {
 		boolean exit = false;
 		String read_in = null;
 		int choice = 0;
 		
-		//ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		//gameController = (IGameController) context.getBean("gameController");
+		gameController = (IGameController) context.getBean("gameController");
 		
 		while(!exit){
 			System.out.println("1. Add Game\n2. Add Note to Game\n3. Log Event\n4. Add a Scheduled Game\n5. Edit Scheduled Game\n"
@@ -69,12 +73,11 @@ public class Game_Handler {
 			
 	}
 	
-	private static void GuiFinalizeGame() {
-		// TODO Auto-generated method stub
-		GuiPauseGame();
+	private void GuiFinalizeGame() {
+		gameController.finalizeGame(gameIDforStartandPause);
 	}
 
-	private static void GuiGetGameStats() throws NumberFormatException, IOException {
+	private void GuiGetGameStats() throws NumberFormatException, IOException {
 		String stats = null; 
 		int gameID = 0; 
 		
@@ -87,7 +90,7 @@ public class Game_Handler {
 		System.out.println("The statistics for game ID: " + gameID + " are: " + stats);
 	}
 
-	private static void GuiCreateCustomSport() throws IOException {
+	private void GuiCreateCustomSport() throws IOException {
 		String file = null; 
 		int ret = 0; 
 		
@@ -104,7 +107,7 @@ public class Game_Handler {
 		}
 	}
 
-	private static void GuiPauseGame() {
+	private void GuiPauseGame() {
 		boolean gamePaused;
 		
 		gamePaused = gameController.pauseGame(gameIDforStartandPause);
@@ -116,7 +119,7 @@ public class Game_Handler {
 		}
 	}
 
-	private static void GuiStartGame() throws NumberFormatException, IOException {
+	private void GuiStartGame() throws NumberFormatException, IOException {
 		boolean gameStart;
 		
 		System.out.println("Please enter the ID number of the game you would like to start: ");
@@ -132,18 +135,17 @@ public class Game_Handler {
 		}
 	}
 
-	private static void GuiEditScheduledGame() {
-		int gameID = 0; 
-		String timeEdited = null; 
-		String newTime = null;
-		
-		timeEdited = gameController.editScheduledGame(gameID,  newTime);
-		
-		System.out.println(timeEdited);
+	private void GuiEditScheduledGame() throws NumberFormatException, IOException {
+		System.out.println("Please enter the ID number of the game you would like to start: ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int gameID = Integer.parseInt(br.readLine()); 
+		System.out.println("Please enter the new time for the game (ex. 5/16/2014 8:00 pm): ");
+		String newTime = br.readLine();
+		System.out.println(gameController.editScheduledGame(gameID, newTime));
 		
 	}
 
-	private static void GuiAddScheduledGame() throws IOException {
+	private  void GuiAddScheduledGame() throws IOException {
 		String retVal = null;
 		String team1 = null;
 		String team2 = null;
@@ -172,7 +174,7 @@ public class Game_Handler {
 		
 	}
 
-	private static void GuiLogEvent() throws NumberFormatException, IOException {
+	private  void GuiLogEvent() throws NumberFormatException, IOException {
 		int eventId = 0;
 		int playerId = 0; 
 		int gameId = 0; 
@@ -196,7 +198,7 @@ public class Game_Handler {
 		
 	}
 
-	private static void GuiAddNotetoGame() throws IOException {
+	private  void GuiAddNotetoGame() throws IOException {
 		String note = null;
 		//int teamID = 0;
 		int gameID = 0;
@@ -215,7 +217,7 @@ public class Game_Handler {
 
 		gameController.addGameNote(/*teamID,*/ gameID, note);
 	}
-	private static void GuicreateGame() throws IOException {
+	private  void GuicreateGame() throws IOException {
 		String createdGame = null;
 		String team1 = null;
 		String team2 = null;

@@ -4,21 +4,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import coms362.scoretracker.controller.ITeamController;
 
 public class Team_Handler {
 	
-	@Autowired
-	private static ITeamController teamController;
+	private ITeamController teamController;
+	private ApplicationContext context;
+	
+	public Team_Handler(ApplicationContext c) {
+		context = c;
+	}
 
-	static void Team_Handler_Method() throws IOException {
+	void Team_Handler_Method() throws IOException {
 		boolean exit = false;
 		String read_in = null;
 		int choice = 0;
-		//ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		//teamController = (ITeamController) context.getBean("teamController");
+		teamController = (ITeamController) context.getBean("teamController");
 		
 		while(!exit){
 			System.out.println("1. Add Team\n2. Add Note to Team\n3. Get Team Statistics\n4. Return to Categories ");
@@ -49,7 +52,7 @@ public class Team_Handler {
 		}
 	}
 	
-	private static void GuiGetTeamStats() throws IOException {
+	private void GuiGetTeamStats() throws IOException {
 		String stats = null; 
 		String teamName = null; 
 		
@@ -63,7 +66,7 @@ public class Team_Handler {
 		
 	}
 
-	private static void GuiAddNotetoTeam() throws IOException {
+	private void GuiAddNotetoTeam() throws IOException {
 		String note = null;
 		String teamName = null;
 
@@ -81,7 +84,7 @@ public class Team_Handler {
 	}
 
 
-	private static void GuicreateTeam() throws IOException {
+	private void GuicreateTeam() throws IOException {
 		boolean createdTeam = false;
 		String teamName;
 

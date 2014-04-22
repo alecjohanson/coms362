@@ -3,7 +3,6 @@ package coms362.scoretracker.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import coms362.scoretracker.management.ILeagueManagementSystem;
-import org.springframework.stereotype.Component;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
  * Date: 3/24/14
  * Time: 11:43 AM
  */
-@Component
 public class LeagueController implements ILeagueController{
 	
 	@Autowired

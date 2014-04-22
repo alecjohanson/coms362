@@ -10,6 +10,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import coms362.scoretracker.controller.GameController;
+import coms362.scoretracker.controller.IGameController;
+import coms362.scoretracker.controller.ILeagueController;
+import coms362.scoretracker.controller.ITeamController;
+import coms362.scoretracker.controller.LeagueController;
+import coms362.scoretracker.controller.TeamController;
+
 @Configuration
 @ComponentScan("coms362.scoretracker")
 @PropertySource(value="classpath:app.properties")
@@ -25,7 +32,7 @@ public class ApplicationConfig {
 	   return ds;
 	}
 
-/*	@Bean(name="teamController")
+	@Bean(name="teamController")
 	public ITeamController getTeamController() {
 		return new TeamController();
 	}
@@ -39,7 +46,10 @@ public class ApplicationConfig {
 	public IGameController getGameController() {
 		return new GameController();
 	}
-
+	
+	
+	
+	/*
 	@Bean(name="teamManager")
 	public ITeamManagementSystem getTeamManager() {
 		return new TeamManagementSystem();

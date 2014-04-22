@@ -3,7 +3,6 @@ package coms362.scoretracker.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import coms362.scoretracker.management.IGameManagementSystem;
 import coms362.scoretracker.management.ITeamManagementSystem;
@@ -12,13 +11,13 @@ import coms362.scoretracker.model.IGame;
 /**
  * Created with IntelliJ IDEA. User: alecjohanson Date: 3/28/14 Time: 10:54 AM
  */
-@Component
 public class GameController implements IGameController {
 
 	@Autowired
 	IGameManagementSystem gameManager;
 
-	private ITeamManagementSystem teamManager;
+	@Autowired
+	ITeamManagementSystem teamManager;
 
 	/**
 	 * Error codes:<br><br>

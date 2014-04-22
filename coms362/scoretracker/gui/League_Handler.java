@@ -4,21 +4,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import coms362.scoretracker.controller.ILeagueController;
 
 public class League_Handler {
 	
-	@Autowired
-	private static ILeagueController leagueController;
+	private ILeagueController leagueController;
 
-	static void League_Handler_Method() throws IOException {
+	
+	private ApplicationContext context;
+	
+	public League_Handler(ApplicationContext c) {
+		context = c;
+	}
+	void League_Handler_Method() throws IOException {
 		boolean exit = false;
 		String read_in = null;
 		int choice = 0;
-		//ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		//leagueController = (ILeagueController) context.getBean("leagueController");
+		leagueController = (ILeagueController) context.getBean("leagueController");
 		while(!exit){
 			System.out.println("1. Add League\n2. Add Note to League\n3. Return to Categories ");
 			System.out.println("Enter choice: ");
@@ -47,7 +51,7 @@ public class League_Handler {
 	}
 	
 
-	private static void GuicreateLeague() throws IOException {
+	private void GuicreateLeague() throws IOException {
 		boolean createdLeague = false;
 		String leagueName;
 
@@ -65,7 +69,7 @@ public class League_Handler {
 		}
 	}
 	
-	private static void GUIAddTeamtoLeague() throws IOException {
+	private void GUIAddTeamtoLeague() throws IOException {
 		boolean addTeam = false;
 		String teamName = null;
 		String leagueName = null;

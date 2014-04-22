@@ -4,21 +4,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 
 import coms362.scoretracker.controller.ITeamController;
 
 public class Player_Handler {
 
-	@Autowired
-	private static ITeamController teamController;
+	private ITeamController teamController;
+	private ApplicationContext context;
+	
+	public Player_Handler(ApplicationContext c) {
+		context = c;
+	}
 
-	static void Player_Handler_Method() throws IOException {
+	void Player_Handler_Method() throws IOException {
 		boolean exit = false;
 		String read_in = null;
 		int choice = 0;
-		//ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		//teamController = (ITeamController) context.getBean("teamController");
+		teamController = (ITeamController) context.getBean("teamController");
 		while(!exit){
 			System.out.println("1. Add Player\n2. Add Note to Player\n3. Get Player Statistics\n"
 					+ "4. Return to Categories ");
@@ -49,7 +52,7 @@ public class Player_Handler {
 		}
 	}
 	
-	private static void GuiGetPlayerStats() throws IOException {
+	private void GuiGetPlayerStats() throws IOException {
 		// TODO Auto-generated method stub
 		String stats = null;
 		String playerName = null; 
@@ -64,12 +67,12 @@ public class Player_Handler {
 		
 	}
 
-	private static void GuiAddNotetoPlayer() throws IOException {
+	private void GuiAddNotetoPlayer() throws IOException {
 		String note = null;
 		int PlayerID = 0;
 		int teamID = 0;
 
-		System.out.println("Please enter the player number: ");
+		System.out.println("Please enter the player ID: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		PlayerID = Integer.parseInt(br.readLine());
 
@@ -89,7 +92,7 @@ public class Player_Handler {
 
 	
 
-	private static void GuicreatePlayer() throws IOException {
+	private void GuicreatePlayer() throws IOException {
 		boolean createdPlayer = false;
 		String playerFirstName = null;
 		String playerLastName = null;
