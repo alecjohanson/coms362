@@ -26,11 +26,7 @@ public class GameDAO implements IGameDAO {
 	private static final String PUT_GAME_EVENT = "INSERT INTO game_event (sport, name, points) VALUES (?,?,?)";
 	private static final String PUT_SPORT = "INSERT INTO sport (sportname, timelength) VALUES (?,?)";
 	private static final String GET_GAME_LENGTH = "SELECT timelength FROM sport WHERE sportname = ?";
-    //private static final String RESCHED_GAME = "UPDATE game SET starttime = ? WHERE gameid = ?";
-	//private static final String START_GAME = "UPDATE game SET status = ?, laststarttime = ? WHERE gameid = ?";
-	//private static final String PAUSE_GAME = "UPDATE game SET status = ?, timeleft = ? WHERE gameid = ?";
 	private static final String LOG_EVENT = "INSERT INTO game_event_map (eventid, playerid, time, gameid) VALUES (?,?,?,?)";
-	//private static final String FINALIZE_GAME = "UPDATE game SET status = ?, timeleft = ? WHERE gameid = ?";
 	
     @Autowired
 	private DataSource dataSource;
