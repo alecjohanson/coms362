@@ -39,7 +39,6 @@ public class LeagueManagementSystem implements ILeagueManagementSystem {
 			leagueDAO.putLeague((League) curLeague);
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -50,7 +49,6 @@ public class LeagueManagementSystem implements ILeagueManagementSystem {
 			leagueDAO.addLeague(league);
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return false;
 		}
 	}

@@ -35,22 +35,18 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 		return teamDAO.getTeam(teamName);
 	}
 
-	public boolean addNoteToPlayer(int playerID, int teamID, String note) {
-		List<Player> players = teamDAO.getPlayers(teamID);
-		Player player = null;
-		for(int i=0; i<players.size(); i++)
-		{
-			if (players.get(i).getRowid() == playerID)
-			{
-				player = players.get(i);
+	public boolean addNoteToPlayer(int playerID, String teamname, String note) {
+		try {
+			ITeam team = teamDAO.getTeam(teamname);
+			for (Player p : team.getPlayers()) {
+				if (p.getRowid() == playerID) {
+					p.addNote(note);
+				}
 			}
-		}
-		if (player == null)
-			return false;
-		else
-		{
-			player.addNote(note);
+			teamDAO.putTeam(team);
 			return true;
+		} catch (Exception ex) {
+			return false;
 		}
 	}
 
@@ -63,7 +59,6 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 			teamDAO.putTeam(curTeam);
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -77,7 +72,6 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 			teamDAO.putTeam((ITeam) curTeam);
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -91,7 +85,6 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 			gameDAO.putGame(curGame);
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -101,7 +94,6 @@ public class TeamManagementSystem implements ITeamManagementSystem {
             Map<String, BasketballStats> stats = teamDAO.getPlayerStats(playerName);
             return BasketballStatsPrinter.prettyPrintStats(stats.get(playerName));
         } catch (Exception ex) {
-            ex.printStackTrace();
             return "An error occured";
         }
     }
@@ -112,7 +104,6 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 			teamDAO.addTeam(team);
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -123,7 +114,6 @@ public class TeamManagementSystem implements ITeamManagementSystem {
 			Map<String, BasketballStats> stats = teamDAO.getTeamStats(teamName);
 			return BasketballStatsPrinter.prettyPrintStats(stats.get(teamName));
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return "An error occured";
 		}
 	}

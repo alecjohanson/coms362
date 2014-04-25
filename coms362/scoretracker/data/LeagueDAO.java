@@ -62,11 +62,6 @@ public class LeagueDAO implements ILeagueDAO {
 			jdbcTemplate.update(PUT_LEAGUE_TEAMS, new Object[] { league.getLeagueId(), t.getTeamId() });
 		}
 	}
-	
-	public int generateSchedule(String leagueName, int numGamesPerTeam) {
-		ILeague league = getLeague(leagueName);
-		return 0;
-	}
 
 	private List<ITeam> getTeams(int leagueid) {
 		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);

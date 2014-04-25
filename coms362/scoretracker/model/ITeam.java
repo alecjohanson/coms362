@@ -31,4 +31,6 @@ public interface ITeam {
 	public abstract String toString();
 	
 	public abstract List<String> getNewNotes();
+	
+	public abstract List<String> getNotes();
 }

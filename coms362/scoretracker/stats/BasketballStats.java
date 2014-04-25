@@ -1,5 +1,7 @@
 package coms362.scoretracker.stats;
 
+import java.util.List;
+
 /**
  * Created by Jack on 4/17/2014.
  */
@@ -17,6 +19,7 @@ public class BasketballStats {
     private int BLK;
     private int FLS;
     private int TNS;
+    private List<String> notes;
 
     public BasketballStats() {
 
@@ -149,5 +152,13 @@ public class BasketballStats {
         this.gamesPlayed += gamesPlayed;
     }
 
-    private int gamesPlayed;
+    public List<String> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<String> notes) {
+		this.notes = notes;
+	}
+
+	private int gamesPlayed;
 }

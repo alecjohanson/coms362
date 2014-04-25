@@ -47,7 +47,6 @@ public class GameDAO implements IGameDAO {
         try {
             ret = (Game) jdbcTemplate.queryForObject(GET_GAME, new Object[]{gameID}, new GameRowMapper());
         } catch (Exception ex) {
-        	ex.printStackTrace();
             return null;
         }
 		return ret;
@@ -81,7 +80,6 @@ public class GameDAO implements IGameDAO {
 					game.getLaststarttime(), game.getGameId());
 			return true;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -97,46 +95,9 @@ public class GameDAO implements IGameDAO {
 		} catch (NumberFormatException nex) {
 			return 1;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return 2;
 		}
 	}
-	
-	/*public int startGame(int gameId)
-	{
-		try {
-            if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
-			Game game = getGame(gameId);
-			game.setStatus(Game.STATUS_INPROGRESS);
-            Long curTime = System.currentTimeMillis();
-			jdbcTemplate.update(START_GAME, game.getStatus(), curTime, gameId);
-			return 0;
-			// TODO Set error codes
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return 1;
-		}
-	}
-	
-	public int pauseGame(int gameId)
-	{
-        if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
-		Game game = getGame(gameId);
-		Long curTime = System.currentTimeMillis();
-        game.setStatus(Game.STATUS_PAUSED);
-		game.setTimeleft(game.getTimeleft() - (curTime - game.getLaststarttime()));
-		jdbcTemplate.update(PAUSE_GAME, game.getStatus(), game.getTimeleft(), gameId);
-        // TODO Set error codes
-        return 0;
-	}
-	
-	public void finalizeGame(int gameId) {
-		if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
-		Game game = getGame(gameId);
-		game.setStatus(Game.STATUS_COMPLETE);
-		game.setTimeleft(0L);
-		jdbcTemplate.update(FINALIZE_GAME, game.getStatus(), game.getTimeleft(), gameId);
-	}*/
 
     public int logEvent(int eventId, int playerId, int gameId) {
         if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
@@ -159,24 +120,12 @@ public class GameDAO implements IGameDAO {
 		return putGame(game);
 	}
 
-    /*public int editScheduledGame(int gameId, Calendar cal) {
-        try {
-            if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
-            jdbcTemplate.update(RESCHED_GAME, cal.getTimeInMillis(), gameId);
-            return 0;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return 3;
-        }
-    }*/
-
     private Long getGameLengthFromSport(String sport)
 	{
 		try {
             if (jdbcTemplate == null) jdbcTemplate = new JdbcTemplate(dataSource);
 			return jdbcTemplate.queryForObject(GET_GAME_LENGTH, new Object[] {sport}, Long.class);
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			return null;
 		}
 	}

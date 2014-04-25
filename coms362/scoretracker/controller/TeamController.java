@@ -19,8 +19,8 @@ public class TeamController implements ITeamController {
 		return teamManager.addTeam(teamName);
 	}
 
-	public void addNotetoPlayer(int playerID, int teamID, String note) {
-		teamManager.addNoteToPlayer(playerID, teamID, note);
+	public void addNotetoPlayer(int playerID, String teamname, String note) {
+		teamManager.addNoteToPlayer(playerID, teamname, note);
 	}
 
 	public void addNotetoTeam(String teamName, String note) {

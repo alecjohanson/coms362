@@ -59,7 +59,6 @@ public class GameManagementSystem implements IGameManagementSystem{
 			game.setLaststarttime(System.currentTimeMillis());
             return gameDAO.updateGame(game);
     	} catch (Exception ex) {
-    		ex.printStackTrace();
     		return false;
     	}
     }
@@ -71,7 +70,6 @@ public class GameManagementSystem implements IGameManagementSystem{
     		game.setTimeleft(game.getTimeleft() - (curTime - game.getLaststarttime()));
     		return gameDAO.updateGame(game);
     	} catch (Exception ex) {
-    		ex.printStackTrace();
     		return false;
     	}
     }
@@ -83,7 +81,6 @@ public class GameManagementSystem implements IGameManagementSystem{
     		game.setTimeleft(0L);
     		return gameDAO.updateGame(game);
     	} catch (Exception ex) {
-    		ex.printStackTrace();
     		return false;
     	}
     }
@@ -92,7 +89,6 @@ public class GameManagementSystem implements IGameManagementSystem{
         try {
             return gameDAO.logEvent(eventId, playerId, gameId);
         } catch (Exception ex) {
-            ex.printStackTrace();
             return 3;
         }
     }
@@ -106,7 +102,6 @@ public class GameManagementSystem implements IGameManagementSystem{
 		try {
 			cal.setTime(dateFormat.parse(date));
 		} catch (ParseException e) {
-			e.printStackTrace();
 			return 4;
 		}
 		return gameDAO.addScheduledGame(team1Name, team2Name, sport.toLowerCase(), cal);

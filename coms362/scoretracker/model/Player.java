@@ -1,5 +1,8 @@
 package coms362.scoretracker.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: alecjohanson
@@ -15,7 +18,8 @@ public class Player implements IPlayer
 	private String position;
 	private double weight;
 	private int rowid;
-	private String note;
+	private List<String> notes;
+	private List<String> newNotes;
 	
 	public Player(String firstName, String lastName, int number, String position, double weight) {
 		this.firstName = firstName;
@@ -23,10 +27,11 @@ public class Player implements IPlayer
 		this.number = number;
 		this.position = position;
 		this.weight = weight;
+		this.newNotes = new ArrayList<String>();
 	}
 	
 	public void addNote(String note) {
-		this.note = note;
+		this.newNotes.add(note);
 	}
 
 	public String getFirstName() {
@@ -79,5 +84,16 @@ public class Player implements IPlayer
 	
 	public String toString() {
 		return "#" + this.number + " " + this.firstName + " " + this.lastName + ", " + this.position;
+	}
+
+	public List<String> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<String> notes) {
+		this.notes = notes;
+	}
+	public List<String> getNewNotes() {
+		return newNotes;
 	}
 }

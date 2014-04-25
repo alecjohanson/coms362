@@ -70,7 +70,7 @@ public class Team_Handler {
 		String note = null;
 		String teamName = null;
 
-		System.out.println("Please enter the team ID: ");
+		System.out.println("Please enter the team name: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		teamName = br.readLine();
 

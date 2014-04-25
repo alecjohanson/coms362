@@ -70,23 +70,23 @@ public class Player_Handler {
 	private void GuiAddNotetoPlayer() throws IOException {
 		String note = null;
 		int PlayerID = 0;
-		int teamID = 0;
+		String teamname;
 
 		System.out.println("Please enter the player ID: ");
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		PlayerID = Integer.parseInt(br.readLine());
 
-		System.out.println("Please enter the team ID: ");
+		System.out.println("Please enter the team name: ");
 		br = new BufferedReader(new InputStreamReader(System.in));
-		teamID = Integer.parseInt(br.readLine());
+		teamname = br.readLine();
 
 		System.out.println("Please enter the note: ");
 		br = new BufferedReader(new InputStreamReader(System.in));
 		note = br.readLine();
 
-		teamController.addNotetoPlayer(PlayerID, teamID, note);
+		teamController.addNotetoPlayer(PlayerID, teamname, note);
 
-		System.out.println("Your note was successfully added to " + PlayerID + "on team: " + teamID);
+		System.out.println("Your note was successfully added to " + PlayerID + " on team: " + teamname);
 
 	}
 

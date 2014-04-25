@@ -29,6 +29,10 @@ public class BasketballStatsPrinter {
         sb.append(stats.getBLK()).append("\t");
         sb.append(stats.getFLS()).append("\t");
         sb.append(stats.getTNS());
+        sb.append("\n\nNotes\n");
+        for (String note : stats.getNotes()) {
+        	sb.append(note + "\n");
+        }
         return sb.toString();
     }
 }
